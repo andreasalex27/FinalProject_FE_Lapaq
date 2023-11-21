@@ -48,7 +48,7 @@ const SignUp = () => {
   return (
     <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312'}}>
 
-      <div className="container pt-5" style={{ maxWidth: '480px', backgroundColor: 'white' }}>
+      <div className="container pt-5" style={{ maxWidth: '390px', backgroundColor: 'white', height: '100%', paddingTop: '10vh', paddingBottom: '10vh' }}>
 
         <div className="logo">
           <img src={logo} alt="logo lapaq" style={{width: "30%"}}/>
