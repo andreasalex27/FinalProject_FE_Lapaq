@@ -5,24 +5,26 @@
   margin: 0;
   text-decoration: none;
 }
+
 body {
-  box-sizing: border-box;
+  /*box-sizing: border-box;*/
   font-family: "montserrat", sans-serif;
-  background-color: rgb(244, 244, 244);
+  /*background-color: rgb(201, 12, 12);*/
 }
 
 .container {
-  background: white;
-  width: 390px;
-  height: 100vh;
+  /*background: rgb(255, 255, 255);
+  width: 390px;*/
+  height: 100%;
   margin: auto;
-  display: flex;
+  /*display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: space-between; */
-  /* position: sticky; */
-  /* height: fit-content; */
+  justify-content: space-between;
+  position: sticky;
+  height: fit-content; */
 }
+
 .form-daftar {
   /* height: 56%; */
   width: 100%;
@@ -31,6 +33,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 #daftar {
   width: 100%;
   padding-left: 10%;
@@ -39,6 +42,7 @@ body {
   font-size: 25px;
   font-weight: bold;
 }
+
 .form-daftar form {
   margin-top: 10px;
   width: 100%;
@@ -47,6 +51,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .form-daftar form .no-nik,
 .form-daftar form .password,
 .form-daftar form .con-password,
@@ -60,10 +65,12 @@ body {
   border-radius: 13px;
   text-align: center;
 }
-.form-daftar form .wrapper-nama {
+
+/*.form-daftar form .wrapper-nama {
   display: flex;
   justify-content: center;
-}
+}*/
+
 .form-daftar form .wrapper-nama .nama-depan,
 .form-daftar form .wrapper-nama .nama-belakang {
   display: flex;
@@ -75,6 +82,7 @@ body {
   border-radius: 13px;
   text-align: center;
 }
+
 .form-daftar form .wrapper-nama #nama-depan,
 .form-daftar form .wrapper-nama #nama-belakang {
   width: 100%;
@@ -87,6 +95,7 @@ body {
   font-weight: bold;
   filter: opacity(0.6);
 }
+
 .form-daftar form #no-nik,
 .form-daftar form #password,
 .form-daftar form #con-password,
@@ -100,9 +109,11 @@ body {
   font-weight: bold;
   filter: opacity(0.6);
 }
+
 .form-daftar form .bi {
   margin: 0 2%;
 }
+
 .form-daftar #login {
   width: 100%;
   padding-left: 10%;
@@ -110,6 +121,7 @@ body {
   color: #b31312;
   font-size: 25px;
 }
+
 .cta {
   /* margin-top: 5%; */
   display: flex;
@@ -117,17 +129,20 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .cta input[type="checkbox"] {
   width: 15px;
   height: 15px;
   margin-right: 10px;
 }
+
 .cta .cta-kebijakan {
   margin: 0 10%;
   display: flex;
   align-items: center;
   /* background-color: #0093ED; */
 }
+
 .logo {
   height: 25%;
   padding: 6px;
@@ -136,6 +151,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .logo img {
   width: 128px;
   height: auto;
@@ -151,9 +167,11 @@ body {
   margin-top: 12px;
   cursor: pointer;
 }
+
 #submit:hover {
   background-color: #890606;
 }
+
 .saran {
   height: auto;
   margin-top: 10%;
@@ -164,12 +182,20 @@ body {
   justify-content: center;
   /* position: absolute; */
 }
+
 .saran span {
   /* position: relative; */
   /* margin-bottom: 24px; */
   left: 0px;
 }
+
 .saran span a {
   color: #0093ed;
   text-decoration: none;
+}
+
+.error {
+  text-align: start;
+  color: #B31312;
+  font-size: 14px;
 }
