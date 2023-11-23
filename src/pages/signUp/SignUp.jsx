@@ -46,7 +46,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312'}}>
+    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', height: '100vh'}}>
 
       <div className="container pt-5" style={{ maxWidth: '390px', backgroundColor: 'white', height: '100%', paddingTop: '10vh', paddingBottom: '10vh' }}>
 

@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 import React, {useState} from 'react'
-=======
-import React, { useState } from 'react'
->>>>>>> e9cfa953884d01905bcb617b6b6bf17d3bf2a4a5
 import "../signIn/SignIn.css"
 import logo from '../../assets/lapaq-logo.png'
 
 const SignIn = () => {
-<<<<<<< HEAD
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -30,36 +25,6 @@ const SignIn = () => {
     }
   };
   
-=======
-  const [errors, setErrors] = useState({
-    username: '',
-    password: ''
-  });
-
-const handleSubmit = (event) => {
-  event.preventDefault();
-  const form = event.target;
-
-  const username = form['username'].value.trim();
-  const password = form['password'].value.trim();
-
-  const newErrors = {
-    username: !username ? 'username harus diisi' : '',
-    password: !password ? 'password harus diisi' : ''
-  };
-
-  setErrors(newErrors);
-
-  const hasErrors = Object.values(newErrors).some(error => error !== '');
-
-  if (hasErrors) {
-    return;
-  }
-
-  console.log('Data valid. Melanjutkan proses sign in')
-};
-
->>>>>>> e9cfa953884d01905bcb617b6b6bf17d3bf2a4a5
 
   return (
     <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', height: '100vh'}}>
@@ -70,11 +35,7 @@ const handleSubmit = (event) => {
         </div>
         <div className="form-login">
           <h3 id="login">Log In</h3>
-<<<<<<< HEAD
           <form action="/login" method="post" id="login-form" onSubmit={handleFormSubmit}>
-=======
-          <form onSubmit={handleSubmit} id="login-form">
->>>>>>> e9cfa953884d01905bcb617b6b6bf17d3bf2a4a5
             <div className="username">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-person" viewBox="0 0 16 16">
                 <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
@@ -105,14 +66,7 @@ const handleSubmit = (event) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-<<<<<<< HEAD
             <div className="cta mb-5">
-=======
-            <div className='error'>
-              {errors.password && <p>{errors.password}</p>}
-            </div>
-            <div className="cta">
->>>>>>> e9cfa953884d01905bcb617b6b6bf17d3bf2a4a5
               <div className="cta-ingat-saya">
                 <input type="checkbox" id="cb-ingat-saya" name="ingatSaya" />
                 <label htmlFor="ingatSaya">Ingat Saya </label>
