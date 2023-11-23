@@ -59,13 +59,15 @@ const Homepage = () => {
     <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px'}}>
         <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto' }}>
           <div className="pe-3" style={{backgroundColor: '#2b2a4c', height: '55px', paddingTop: '13px'}}>
-            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+            <div className="d-flex justify-content-md-end">
+            <div className="ms-auto">
                 <button className="btn btn-sm me-md-2 fw-semibold" type="button" style={{backgroundColor: 'white', height: '30px', fontSize: '13px'}}>Register</button>
-                <button className="btn btn-sm fw-semibold" type="button" style={{backgroundColor: '#B31312', color: 'white', height: '30px', fontSize: '13px'}}>Login</button>
+                <button className="btn btn-sm ms-2 fw-semibold" type="button" style={{backgroundColor: '#B31312', color: 'white', height: '30px', fontSize: '13px'}}>Login</button>
+            </div>
             </div>
           </div>
-          <div className="container-lg bg p-4" style={{backgroundImage: `url("https://i.imgur.com/HhZqaeQ.png")`, backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
-            <nav className="navbar d-flex nav">
+          <div className="container-lg bg py-4" style={{backgroundImage: `url("https://i.imgur.com/HhZqaeQ.png")`, backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
+            <nav className="navbar d-flex nav px-2">
                 <div>
                     <a className="navbar-brand" href="#">
                         <img src="https://i.imgur.com/OXNQ3Sf.png" alt="Bootstrap" width="40"/>
@@ -85,7 +87,7 @@ const Homepage = () => {
                 </div>
             </nav>
 
-            <div className="container-fluid pt-4">
+            <div className="container-fluid pt-5 pb-3">
               <div className="d-flex justify-content-center align-items-center text-center gap-3 mx-auto">
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <div className="bg-white rounded d-flex justify-content-center align-items-center" style={{ height: "40px", width: "40px" }}>
