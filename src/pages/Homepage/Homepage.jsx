@@ -58,8 +58,8 @@ const Homepage = () => {
   return (
     <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px'}}>
         <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto' }}>
-          <div className="container-lg bg p-4" style={{backgroundImage: `url("https://i.imgur.com/HhZqaeQ.png")`, backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
-            <nav className="navbar d-flex nav">
+          <div className="container-lg bg py-4" style={{backgroundImage: `url("https://i.imgur.com/HhZqaeQ.png")`, backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
+            <nav className="navbar d-flex nav px-2">
                 <div>
                     <a className="navbar-brand" href="#">
                         <img src="https://i.imgur.com/OXNQ3Sf.png" alt="Bootstrap" width="40"/>
