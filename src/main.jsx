@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import Homepage from './pages/Homepage/Homepage.jsx'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
