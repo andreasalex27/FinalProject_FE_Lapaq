@@ -13,7 +13,7 @@ const bdNavy = {
   borderStyle: "solid",
 };
 
-const DaftarToko = () => {
+const ShopRegister = () => {
   const [formData, setFormData] = useState({
     namaToko: '',
     alamatToko: '',
@@ -115,4 +115,4 @@ const DaftarToko = () => {
   );
 };
 
-export default DaftarToko;
+export default ShopRegister;
