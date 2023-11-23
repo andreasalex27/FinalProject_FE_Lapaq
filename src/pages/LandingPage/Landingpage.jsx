@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ImageFallback from 'react-image-fallback';
 import { Icon } from '@iconify/react';
 
-const Homepage = () => {
+const LandingPage = () => {
   const [products, setProducts] = useState({
     elektronik: [],
     kecantikan: [],
@@ -182,4 +182,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default LandingPage;
