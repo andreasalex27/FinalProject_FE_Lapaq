@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'; // Import ikon yang diperlukan
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 const clNavy = {
   color: "#2B2A4C",
@@ -69,7 +69,7 @@ const DaftarToko = () => {
 
   return (
     <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312'}}>
-    <div className="container pt-5" style={{ maxWidth: '480px', backgroundColor: 'white' }}>
+    <div className="container pt-5" style={{ maxWidth: '390px', backgroundColor: 'white' }}>
     <img src="https://i.imgur.com/OXNQ3Sf.png" className="img-fluid d-block mx-auto mb-4" alt="Toko" width="100" />
       <h1 className="text-center fs-3 my-5 fw-bold" style={{ color: '#B31312' }}>Daftar Toko</h1>
       <form className="m-4" onSubmit={handleSubmit}>
@@ -105,11 +105,8 @@ const DaftarToko = () => {
         <>
           <div className="position-fixed top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
           <div className="position-fixed top-50 start-50 translate-middle p-4 bg-light border rounded text-center">
-          <FontAwesomeIcon icon={faCheckCircle} size="4x" className="mb-3"/>           
-          <p className="fs-5" style={{color: "#2B2A4C"}}>Berhasil daftar toko</p>
-            {/* You can further customize the popup */}
-            {/* For example: */}
-            {/* <img src="gambar.png" alt="Icon" /> */}
+            <FontAwesomeIcon icon={faCheckCircle} size="4x" className="mb-3"/>           
+            <p className="fs-5" style={{color: "#2B2A4C"}}>Berhasil daftar toko</p>
           </div>
         </>
       )}
