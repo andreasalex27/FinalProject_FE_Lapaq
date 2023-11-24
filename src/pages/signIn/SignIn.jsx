@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import "../signIn/SignIn.css"
 import logo from '../../assets/lapaq-logo.png'
+import axios from 'axios'
+import {login} from "../../services/auth"
 
 const SignIn = () => {
 
@@ -8,7 +10,7 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     if (!username.trim() && !password.trim()) {
@@ -23,6 +25,13 @@ const SignIn = () => {
       setError(''); // Reset pesan error jika validasi berhasil
       // Lakukan sesuatu setelah validasi berhasil
     }
+
+    const result = await login(
+      {
+        username: username,
+        password: password,
+      }
+    )
   };
   
 
@@ -50,7 +59,7 @@ const SignIn = () => {
               />
             </div>
             <div className='error'>
-              {errors.username && <p>{errors.username}</p>}
+              {error.username && <p>{error.username}</p>}
             </div>
 
             <div className="password">
