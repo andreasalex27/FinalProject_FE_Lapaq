@@ -34,7 +34,7 @@ const EditProfileSeller = () => {
     ) {
         Swal.fire({
         icon: 'error',
-        title: '<span style="font-size: 16px; color: red;">Form tidak boleh kosong!</span>',
+        title: '<span style="font-size: 16px; color: red;">Form tidak boleh kosong</span>',
         showConfirmButton: false,
         width: '300px',
         timer: '3000',
@@ -47,8 +47,8 @@ const EditProfileSeller = () => {
 
     if (password.length < 8) {
         Swal.fire({
-        icon: 'error',
-        title: '<span style="font-size: 16px; color: red;">Password harus berisi minimal 8 karakter!</span>',
+        icon: 'warning',
+        title: '<span style="font-size: 16px; color: #EA906C;">Password harus berisi minimal 8 karakter</span>',
         showConfirmButton: false,
         width: '300px',
         timer: '3000',
@@ -61,8 +61,8 @@ const EditProfileSeller = () => {
 
     if (!/^\d{6}$/.test(pinToko)) {
         Swal.fire({
-        icon: 'error',
-        title: '<span style="font-size: 16px; color: red;">Pin Toko harus terdiri dari 6 digit angka!</span>',
+        icon: 'warning',
+        title: '<span style="font-size: 16px; color: #EA906C;">Pin Toko harus terdiri dari 6 digit angka</span>',
         showConfirmButton: false,
         width: '300px',
         timer: '3000',
@@ -80,7 +80,7 @@ const EditProfileSeller = () => {
     // Tampilkan pop-up notifikasi bahwa profil telah diubah
     Swal.fire({
         icon: 'success',
-        title: '<span style="font-size: 16px; color: green;">Profil berhasil diubah!</span>',
+        title: '<span style="font-size: 16px; color: green;">Profil berhasil diubah</span>',
         showConfirmButton: false,
         width: '300px',
         timer: '3000',
