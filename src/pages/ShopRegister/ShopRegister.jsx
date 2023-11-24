@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 const clNavy = {
   color: "#2B2A4C",
@@ -23,7 +22,6 @@ const ShopRegister = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,35 +31,83 @@ const ShopRegister = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validateForm(formData);
-    if (Object.keys(validationErrors).length === 0) {
-      console.log('Data toko valid:', formData);
-      setFormData({
-        namaToko: '',
-        alamatToko: '',
-        email: '',
-        password: '',
-        pinToko: '',
+
+  if (Object.keys(validationErrors).length === 0) {
+    // Logika untuk menyimpan data jika valid
+    console.log('Data toko valid:', formData);
+    Swal.fire({
+      icon: 'success',
+      title: '<span style="font-size: 16px; color: green;">Berhasil daftar toko</span>',
+      showConfirmButton: false,
+      width: '300px',
+      timer: '3000',
+      customClass: {
+        title: 'custom-title-class',
+      },
+    });
+    setFormData({
+      namaToko: '',
+      alamatToko: '',
+      email: '',
+      password: '',
+      pinToko: '',
+    });
+    setErrors({});
+  } else {
+    // Menampilkan pesan error menggunakan SweetAlert sesuai validasi yang terjadi
+    if (validationErrors.requiredFields) {
+      Swal.fire({
+        icon: 'error',
+        title: '<span style="font-size: 16px; color: red;">Form tidak boleh kosong</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+        customClass: {
+            title: 'custom-title-class',
+        },
       });
-      setErrors({});
-      setShowSuccessPopup(true);
-    } else {
-      setErrors(validationErrors);
+    } else if (validationErrors.password) {
+      Swal.fire({
+        icon: 'warning',
+        title: '<span style="font-size: 16px; color: #EA906C;">Password harus berisi minimal 8 karakter</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+        customClass: {
+            title: 'custom-title-class',
+        },
+      });
+    } else if (validationErrors.pinToko) {
+      Swal.fire({
+        icon: 'warning',
+        title: '<span style="font-size: 16px; color: #EA906C;">Pin Toko harus terdiri dari 6 digit angka</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+        customClass: {
+            title: 'custom-title-class',
+        },
+      });
+    }
+
+    setErrors(validationErrors);
     }
   };
 
+  // Fungsi untuk melakukan validasi
   const validateForm = (data) => {
     const errors = {};
 
     if (!data.namaToko || !data.alamatToko || !data.email || !data.password || !data.pinToko) {
-      errors.requiredFields = '*Semua input harus diisi.';
+      errors.requiredFields = true;
     }
 
     if (data.password.length < 8) {
-      errors.password = '*Password harus memiliki setidaknya 8 karakter.';
+      errors.password = true;
     }
 
     if (!(/^\d{6}$/).test(data.pinToko)) {
-      errors.pinToko = '*Pin toko harus berupa 6 digit angka.';
+      errors.pinToko = true;
     }
 
     return errors;
@@ -100,16 +146,6 @@ const ShopRegister = () => {
             <button type="submit" className="btn mb-2 fw-bold text-white" style={{ backgroundColor: '#B31312'}}>Daftar Toko</button>
         </div>
       </form>
-
-      {showSuccessPopup && (
-        <>
-          <div className="position-fixed top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
-          <div className="position-fixed top-50 start-50 translate-middle p-4 bg-light border rounded text-center">
-            <FontAwesomeIcon icon={faCheckCircle} size="4x" className="mb-3"/>           
-            <p className="fs-5" style={{color: "#2B2A4C"}}>Berhasil daftar toko</p>
-          </div>
-        </>
-      )}
     </div>
     </div>
   );
