@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import "../signIn/SignIn.css"
 import logo from '../../assets/lapaq-logo.png'
+import Swal from 'sweetalert2'
 import axios from 'axios'
 import {login} from "../../services/auth"
 
@@ -12,33 +13,63 @@ const SignIn = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!username.trim() && !password.trim()) {
-      setError('*User harus mengisi username dan password');
+      Swal.fire({
+        icon: 'error',
+        title: '<span style="font-size: 16px; color: red;">Form tidak boleh kosong</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+      });
     } else if (!username.trim()) {
-      setError('*User harus mengisi username');
+      Swal.fire({
+        icon: "question",
+        title: '<span style="font-size: 16px; color:#3876BF;">Isi username</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: 3000,
+      });
     } else if (!password.trim()) {
-      setError('*User harus mengisi password');
+      Swal.fire({
+        icon: "question",
+        title: '<span style="font-size: 16px; color:#3876BF;">Isi password</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: 3000,
+      });
     } else if (password.length < 8) {
-      setError('*Password harus berisi minimal 8 karakter');
+      Swal.fire({
+        icon: 'warning',
+        title: '<span style="font-size: 16px; color: #EA906C;">Password harus berisi minimal 8 karakter</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+      });
     } else {
-      setError(''); // Reset pesan error jika validasi berhasil
+      Swal.fire({
+        icon: 'success',
+        title: '<span style="font-size: 16px; color: green;">Berhasil login</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+      });
+  
       // Lakukan sesuatu setelah validasi berhasil
-    }
-
-    const result = await login(
-      {
+      const result = await login({
         username: username,
         password: password,
-      }
-    )
+      });
+  
+      // Redirect atau tindakan lain setelah login berhasil
+    }
   };
   
 
   return (
     <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', height: '100vh'}}>
 
-<div className="container d-flex flex-column justify-content-between" style={{ maxWidth: '390px', backgroundColor: 'white', height: '100%', paddingTop: '10vh', paddingBottom: '10vh'}}>
+      <div className="container d-flex flex-column justify-content-between" style={{ maxWidth: '390px', backgroundColor: 'white', height: '100%', paddingTop: '10vh', paddingBottom: '10vh'}}>
         <div className="logo">
           <img src={logo} alt="logo lapaq" />
         </div>
