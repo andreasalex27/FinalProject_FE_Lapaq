@@ -38,8 +38,8 @@ const SearchPage = () => {
   };
 
   return (
-    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif'}}>
-        <div className="container-md p-0 pb-5 mx-3" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto', height: '100%' }}>
+    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', height: "100vh"}}>
+        <div className="container-md p-0 pb-5 mx-3" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto', height: '100%', overflow: 'auto' }}>
             <nav className="navbar d-flex nav mx-auto justify-content-center align-items-center py-3">
                 <div className="container-lg justify-content-center d d-flex">
                     <form>
