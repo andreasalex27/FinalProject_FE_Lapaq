@@ -4,8 +4,8 @@ import { Icon } from '@iconify/react';
 const Dashboard = () => {
 
     return (
-        <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px'}}>
-            <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto' }}>
+        <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px', height: '105vh'}}>
+            <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto', height: '100%'}}>
 
                 <div className='pt-4 pb-1' style={{boxShadow: '0 3px 3px rgba(0, 0, 0, 0.5)', marginBottom: '3px'}}>
                     <p className='text-center fs-6 fw-bold' style={{color: '#B31312'}}>Toko Saya</p>
@@ -72,18 +72,19 @@ const Dashboard = () => {
                 </div>
 
                 <img className="px-3 mb-5" src='https://i.imgur.com/puvVrP9.jpg' width="100%"/>
-            </div>
-            <div style={{ position: 'fixed', top: '100%', left: '50%', transform: 'translate(-50%, -50%)', width: '390px', height: '120px', backgroundColor: '#EEE2DE', boxShadow: '0px -2px 5px rgba(0, 0, 0, 0.1)'}}>
-                <div className="pt-3" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                    <a href="#">
-                        <Icon icon="material-symbols:team-dashboard" color="#b31312" width="30" />
-                    </a>
-                    <a href="#">
-                        <Icon icon="material-symbols:chat" color="#ea906c" width="30" />  
-                    </a>
-                    <a href="#">
-                        <Icon icon="iconamoon:profile-fill" color="#ea906c" width="30" />            
-                    </a>
+
+                <div style={{ position: 'fixed', top: '100%', left: '50%', transform: 'translate(-50%, -50%)', width: '390px', height: '120px', backgroundColor: '#EEE2DE', boxShadow: '0px -2px 5px rgba(0, 0, 0, 0.1)'}}>
+                    <div className="pt-3" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                        <a href="#">
+                            <Icon icon="material-symbols:team-dashboard" color="#b31312" width="30" />
+                        </a>
+                        <a href="#">
+                            <Icon icon="material-symbols:chat" color="#ea906c" width="30" />  
+                        </a>
+                        <a href="#">
+                            <Icon icon="iconamoon:profile-fill" color="#ea906c" width="30" />            
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
