@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import "../signIn/SignIn.css"
+import "./SignIn.css"
 import logo from '../../assets/lapaq-logo.png'
 import Swal from 'sweetalert2'
 import axios from 'axios'
@@ -115,7 +115,6 @@ const SignIn = () => {
                 <a href="lupa-sandi">Lupa Sandi</a>
               </button>
             </div>
-              {error && <p style={{ color: 'red', fontSize: '14px', float: 'left'}}>{error}</p>}
             <button type="submit" id="btn-login" className='mt-0'>LOG IN</button>
           </form>
         </div>
