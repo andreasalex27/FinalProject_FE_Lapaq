@@ -31,7 +31,7 @@ function Checkout() {
       if (!isRadioSelected) {
         Swal.fire({
             icon: "question",
-            title: '<span style="font-size: 16px;">Pilih metode pembayaran</span>',
+            title: '<span style="font-size: 16px; color:#3876BF;">Pilih metode pembayaran</span>',
             showConfirmButton: false,
             width: '300px',
             timer: 3000,
