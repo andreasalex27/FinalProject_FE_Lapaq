@@ -17,8 +17,9 @@ function Checkout() {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "Pembayaran berhasil..",
+            title: '<span style="font-size: 16px; color: green;">Checkout berhasil</span>',
             showConfirmButton: false,
+            width: '300px',
             timer: 2000,
           });
           setTimeout(() => {
@@ -29,8 +30,11 @@ function Checkout() {
 
       if (!isRadioSelected) {
         Swal.fire({
-          icon: "error",
-          title: "Silahkan pilih metode pembayaran..",
+            icon: "question",
+            title: '<span style="font-size: 16px;">Pilih metode pembayaran</span>',
+            showConfirmButton: false,
+            width: '300px',
+            timer: 3000,
         });
       }
     });
