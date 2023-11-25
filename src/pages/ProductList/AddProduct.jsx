@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-
+import { addProduct } from '../../services/product';
 
 const AddProduct = () => {
   const [formData, setFormData] = useState({
     img: '',
     product: '',
-    category: '',
+    kategori: '',
     harga: '',
     jumlahStok: '',
     deskripsi: '',
@@ -20,12 +20,23 @@ const AddProduct = () => {
     });
   };
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0]; // Mengambil file gambar
+    // Anda dapat menambahkan logika untuk mengunggah file ke sistem Anda di sini
+    // Misalnya, menggunakan FormData untuk mengirim file ke server
+
+    // Di sini, sebagai contoh, hanya menetapkan nama file ke dalam state formData
+    setFormData({
+      ...formData,
+      img: file.name, // Menetapkan nama file ke state formData
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Memeriksa apakah ada input yang kosong
     if (
-        formData.img === '' ||
         formData.product === '' ||
         formData.harga === '' ||
         formData.jumlahStok === '' ||
@@ -42,7 +53,7 @@ const AddProduct = () => {
     }
     
     // Memeriksa apakah kategori sudah dipilih
-    if (formData.category === '') {
+    if (formData.kategori === '') {
     Swal.fire({
         icon: "question",
         title: '<span style="font-size: 16px; color:#3876BF;">Pilih kategori produk</span>',
@@ -54,54 +65,46 @@ const AddProduct = () => {
     }
 
     try {
-      const response = await fetch('https://6524d82aea560a22a4ea298b.mockapi.io/product', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          img: formData.img,
-          product: formData.product,
-          harga: formData.harga,
-          deskripsi: formData.deskripsi,
-          kategori: formData.kategori,
-        }),
+      const response = await addProduct({
+        nama_produk: formData.product,
+        harga: formData.harga,
+        deskripsi: formData.deskripsi,
+        kategori: formData.kategori
       });
 
-      if (!response.ok) {
+      if (response && response.data) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: '<span style="font-size: 16px; color: green;">Produk berhasil ditambahkan</span>',
+          showConfirmButton: false,
+          width: '300px',
+          timer: 2000,
+        });
+
+        // Clear form after successful submission
+        setFormData({
+          img: '',
+          product: '',
+          harga: '',
+          jumlahStok: '',
+          deskripsi: '',
+          kategori: '',
+        });
+      } else {
         throw new Error('Failed to add product');
       }
-
-      // Clear form after successful submission
-      setFormData({
-        img: '',
-        product: '',
-        harga: '',
-        jumlahStok: '',
-        deskripsi: '',
-        kategori: '',
-      });
-
-    // Tampilkan SweetAlert success setelah produk berhasil ditambahkan
-    Swal.fire({
-        position: "center",
-        icon: "success",
-        title: '<span style="font-size: 16px; color: green;">Produk berhasil ditambahkan</span>',
+    } catch (error) {
+      console.error('Error adding product:', error);
+      Swal.fire({
+        icon: 'error',
+        title: '<span style="font-size: 16px; color: red;">Gagal menambahkan produk</span>',
         showConfirmButton: false,
         width: '300px',
-        timer: 2000,
-        });
-    } catch (error) {
-        console.error('Error adding product:', error);
-        Swal.fire({
-            icon: 'error',
-            title: '<span style="font-size: 16px; color: red;">Gagal menambahkan produk</span>',
-            showConfirmButton: false,
-            width: '300px',
-            timer: '3000',
-        });
-      }
-  };
+        timer: '3000',
+      });
+    }
+  }
 
   return (
     <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px', height: '105vh'}}>
@@ -115,7 +118,7 @@ const AddProduct = () => {
                 <form onSubmit={handleSubmit}>
                     <div className='mb-3'>
                         <label htmlFor="img" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Gambar Produk</label>
-                        <input type="text" className="form-control" name="img" value={formData.img} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
+                        <input type="file" className="form-control" name="img" onChange={handleImageChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
                     </div>
 
                     <div className='mb-3'>
