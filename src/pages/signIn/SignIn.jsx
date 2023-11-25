@@ -47,19 +47,42 @@ const SignIn = () => {
         timer: '3000',
       });
     } else {
+
+      try {
+      const result = await login({
+        email: username,
+        password: password,
+      });
+
+      // Cek hasil dari permintaan ke server
+      if (result) {
+        Swal.fire({
+          icon: 'success',
+          title: '<span style="font-size: 16px; color: green;">Berhasil login</span>',
+          showConfirmButton: false,
+          width: '300px',
+          timer: '3000',
+        });
+        // Redirect atau lakukan tindakan lain setelah login berhasil
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: '<span style="font-size: 16px; color: red;">username atau password salah</span>',
+          showConfirmButton: false,
+          width: '300px',
+          timer: '3000',
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
       Swal.fire({
-        icon: 'success',
-        title: '<span style="font-size: 16px; color: green;">Berhasil login</span>',
+        icon: 'error',
+        title: '<span style="font-size: 16px; color: red;">Gagal login</span>',
         showConfirmButton: false,
         width: '300px',
         timer: '3000',
       });
-  
-      // Lakukan sesuatu setelah validasi berhasil
-      const result = await login({
-        username: username,
-        password: password,
-      });
+    }
   
       // Redirect atau tindakan lain setelah login berhasil
     }

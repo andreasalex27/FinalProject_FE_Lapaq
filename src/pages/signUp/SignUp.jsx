@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import logo from "../../assets/lapaq-logo.png";
 import Swal from 'sweetalert2'
 import "./SignUp.css";
+import axios from 'axios'
+import { register } from '../../services/auth';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +16,7 @@ const SignUp = () => {
     cbKebijakan: ''
   });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (e) => {
     event.preventDefault();
 
     const { namaDepan, namaBelakang, email, password, conPassword, noNIK, cbKebijakan } = formData;
@@ -74,16 +76,47 @@ const SignUp = () => {
       return;
     }
 
-    Swal.fire({
-      icon: 'success',
-      title: '<span style="font-size: 16px; color: green;">Registrasi berhasil</span>',
-      showConfirmButton: false,
-      width: '300px',
-      timer: '3000',
-    });
-
     // Lakukan tindakan setelah registrasi berhasil
     console.log('Data valid. Melanjutkan proses registrasi...');
+
+    try {
+      const result = await register({
+        nama_depan: namaDepan,
+        nama_belakang: namaBelakang,
+        email: email,
+        password: password,
+        nik: noNIK
+      });
+
+      // Cek hasil dari permintaan ke server
+      if (result) {
+        Swal.fire({
+          icon: 'success',
+          title: '<span style="font-size: 16px; color: green;">Berhasil registrasi</span>',
+          showConfirmButton: false,
+          width: '300px',
+          timer: '3000',
+        });
+        // Redirect atau lakukan tindakan lain setelah login berhasil
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: '<span style="font-size: 16px; color: red;">Email atau Nik telah terdaftar</span>',
+          showConfirmButton: false,
+          width: '300px',
+          timer: '3000',
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: '<span style="font-size: 16px; color: red;">Gagal registrasi</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+      });
+    }
   };
 
   const handleInputChange = (event) => {
