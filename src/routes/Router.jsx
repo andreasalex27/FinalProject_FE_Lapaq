@@ -1,5 +1,7 @@
 import {Route, Routes} from 'react-router-dom';
-import LandingPage from '../pages/LandingPage/LandingPage';
+import LandingPage from '../pages/LandingPage/LandingPage.jsx';
+import SignIn from '../pages/SignIn/SignIn.jsx';
+import SignUp from '../pages/SignUp/SignUp.jsx'
 
 
 
@@ -9,29 +11,14 @@ const ROUTE_LIST = [
         element: <LandingPage />,
     },
     {
-        path: '/product-new',
+        path: '/sign-in',
         element: <SignIn />,
     },
     {
-        path: '/products',
-        element: <ProductListPage/>,
-    },
-    {
-        path: '/products/:productId',
-        element: <ProductDetailPage/>,
-    },
-    {
-        path: '/redux-product-new',
-        element: <ProductReduxCreatePage/>,
-    },
-    {
-        path: '/redux-products',
-        element: <ProductReduxListPage/>,
-    },
-    {
-        path: '/redux-products/:productId',
-        element: <ProductReduxDetailPage/>,
-    },
+        path: '/sign-up',
+        element: <SignUp />,
+    }
+      
 ];
 
 const AppRouter = () => {
@@ -41,7 +28,7 @@ const AppRouter = () => {
                 <Route
                     key={`route-${index}`}
                     path={route.path}
-                    element={<DashboardLayout>{route.element}</DashboardLayout>}
+                    element={route.element}
                 />
             ))}
         </Routes>

@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ImageFallback from 'react-image-fallback';
 import { Icon } from '@iconify/react';
+import {useNavigate} from 'react-router-dom';
 
 const LandingPage = () => {
+    const navigate = useNavigate();
+
   const [products, setProducts] = useState({
     elektronik: [],
     kecantikan: [],
@@ -55,6 +58,9 @@ const LandingPage = () => {
     );
   };
 
+  const openLoginPage = () => {
+    navigate('/sign-in');
+  }
   return (
     <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px'}}>
         <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto' }}>
@@ -62,7 +68,7 @@ const LandingPage = () => {
             <div className="d-flex justify-content-md-end">
             <div className="ms-auto">
                 <button className="btn btn-sm me-md-2 fw-semibold" type="button" style={{backgroundColor: 'white', height: '30px', fontSize: '13px'}}>Register</button>
-                <button className="btn btn-sm ms-2 fw-semibold" type="button" style={{backgroundColor: '#B31312', color: 'white', height: '30px', fontSize: '13px'}}>Login</button>
+                <button className="btn btn-sm ms-2 fw-semibold" type="button" style={{backgroundColor: '#B31312', color: 'white', height: '30px', fontSize: '13px'}} onClick={openLoginPage} >Login</button>
             </div>
             </div>
           </div>
@@ -127,7 +133,7 @@ const LandingPage = () => {
                 <img className="imgA" src="https://i.imgur.com/Wc4VeqL.png" alt="" width="140px"/>
               </div>
               <div className="text-white text-end motivasi justify-content-center align-items-center ms-auto py-3 pe-3">
-                <p className='lh-sm'>"Yuk, mari kita jalin kerjasama untuk memperkenalkan produk ini kepada lebih banyak orang dan mencapai kesuksesan bersama!"</p>
+                <p className='lh-sm'>&quot;Yuk, mari kita jalin kerjasama untuk memperkenalkan produk ini kepada lebih banyak orang dan mencapai kesuksesan bersama!&quot;</p>
                 <button className="btn btn-danger btn-sm border border-white">Daftar Sekarang</button>
               </div>
             </div>

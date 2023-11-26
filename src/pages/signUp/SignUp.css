@@ -144,8 +144,8 @@ body {
 }
 
 .logo {
-  height: 25%;
-  padding: 6px;
+  /*height: 25%;
+  padding: 6px;*/
   width: 100%;
   display: flex;
   align-items: center;
@@ -192,10 +192,4 @@ body {
 .saran span a {
   color: #0093ed;
   text-decoration: none;
-}
-
-.error {
-  text-align: start;
-  color: #B31312;
-  font-size: 12px;
 }
