@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import logo from "../../assets/lapaq-logo.png";
-import "../signUp/SignUp.css";
+import Swal from 'sweetalert2'
+import "./SignUp.css";
+import axios from 'axios'
+import { register } from '../../services/auth';
 
 const SignUp = () => {
-  const [errors, setErrors] = useState({
+  const [formData, setFormData] = useState({
     namaDepan: '',
     namaBelakang: '',
     email: '',
@@ -13,44 +16,125 @@ const SignUp = () => {
     cbKebijakan: ''
   });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (e) => {
     event.preventDefault();
-    const form = event.target;
 
-    const namaDepan = form['nama-depan'].value.trim();
-    const namaBelakang = form['nama-belakang'].value.trim();
-    const email = form['email'].value.trim();
-    const password = form['password'].value.trim();
-    const conPassword = form['con-password'].value.trim();
-    const noNIK = form['no-nik'].value.trim();
-    const cbKebijakan = form['cb-kebijakan'].checked;
+    const { namaDepan, namaBelakang, email, password, conPassword, noNIK, cbKebijakan } = formData;
 
-    const newErrors = {
-      nama: !namaDepan || !namaBelakang ? 'Nama depan dan belakang harus diisi' : '',
-      email: !email ? 'Email harus diisi' : '',
-      password: password.length < 8 ? 'Password harus memiliki minimal 8 karakter' : '',
-      conPassword: password !== conPassword ? 'Konfirmasi password harus sama dengan password' : '',
-      noNIK: (noNIK.length !== 16 || isNaN(noNIK)) ? 'No NIK harus terdiri dari 16 digit angka' : '',
-      cbKebijakan: !cbKebijakan ? 'Harap setujui kebijakan' : ''
-    };
-
-    setErrors(newErrors);
-
-    const hasErrors = Object.values(newErrors).some(error => error !== '');
-
-    if (hasErrors) {
+    if (!namaDepan || !namaBelakang || !email || !password || !conPassword || !noNIK) {
+      Swal.fire({
+        icon: 'error',
+        title: '<span style="font-size: 16px; color: red;">Form tidak boleh kosong</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+      });
       return;
     }
 
+    if (password.length < 8) {
+      Swal.fire({
+        icon: 'warning',
+        title: '<span style="font-size: 16px; color: #EA906C;">Password harus berisi minimal 8 karakter</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+      });
+      return;
+    }
+
+    if (password !== conPassword) {
+      Swal.fire({
+        icon: 'error',
+        title: '<span style="font-size: 16px; color: red;">Konfirmasi password tidak sama dengan password</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+      });
+      return;
+    }
+
+    if (noNIK.length !== 16 || isNaN(noNIK)) {
+      Swal.fire({
+        icon: 'warning',
+        title: '<span style="font-size: 16px; color: #EA906C;">No NIK harus terdiri dari 16 digit angka</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+      });
+      return;
+    }
+
+    if (!cbKebijakan) {
+      Swal.fire({
+        icon: 'warning',
+        title: '<span style="font-size: 16px; color: #EA906C;">Harap setujui kebijakan</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+      });
+      return;
+    }
+
+    // Lakukan tindakan setelah registrasi berhasil
     console.log('Data valid. Melanjutkan proses registrasi...');
+
+    try {
+      const result = await register({
+        nama_depan: namaDepan,
+        nama_belakang: namaBelakang,
+        email: email,
+        password: password,
+        nik: noNIK
+      });
+
+      // Cek hasil dari permintaan ke server
+      if (result) {
+        Swal.fire({
+          icon: 'success',
+          title: '<span style="font-size: 16px; color: green;">Berhasil registrasi</span>',
+          showConfirmButton: false,
+          width: '300px',
+          timer: '3000',
+        });
+        // Redirect atau lakukan tindakan lain setelah login berhasil
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: '<span style="font-size: 16px; color: red;">Email atau Nik telah terdaftar</span>',
+          showConfirmButton: false,
+          width: '300px',
+          timer: '3000',
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: '<span style="font-size: 16px; color: red;">Gagal registrasi</span>',
+        showConfirmButton: false,
+        width: '300px',
+        timer: '3000',
+      });
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    const val = type === 'checkbox' ? checked : value;
+
+    setFormData({
+      ...formData,
+      [name]: val,
+    });
   };
 
   return (
-    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312'}}>
+    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', height: '100vh'}}>
 
-      <div className="container pt-5" style={{ maxWidth: '390px', backgroundColor: 'white', height: '100%', paddingTop: '10vh', paddingBottom: '10vh' }}>
+      <div className="container" style={{ maxWidth: '390px', backgroundColor: 'white', height: '100%'}}>
 
-        <div className="logo">
+        <div className="logo" style={{height: '200px'}}>
           <img src={logo} alt="logo lapaq" style={{width: "30%"}}/>
         </div>
 
@@ -62,9 +146,11 @@ const SignUp = () => {
                 <input
                   type="text"
                   id="nama-depan"
-                  name="nama-depan"
+                  name="namaDepan"
                   className="form-control input-nama-depan"
                   placeholder="Nama depan"
+                  onChange={handleInputChange}
+                  value={formData.namaDepan}
                 />
               </div>
 
@@ -72,13 +158,12 @@ const SignUp = () => {
                 <input
                   type="text"
                   id="nama-belakang"
-                  name="nama-belakang"
+                  name="namaBelakang"
                   placeholder="Nama belakang"
+                  onChange={handleInputChange}
+                  value={formData.namaBelakang}
                 />
               </div>
-            </div>
-            <div className="error">
-              {errors.nama && <p>{errors.nama}</p>}
             </div>
 
             <div className="email">
@@ -90,10 +175,9 @@ const SignUp = () => {
                 id="email"
                 name="email"
                 placeholder="Email"
-                required />
-            </div>
-            <div className="error">
-              {errors.email && <p>{errors.email}</p>}
+                onChange={handleInputChange}
+                value={formData.email}
+              />
             </div>
 
             <div className="password">
@@ -105,11 +189,9 @@ const SignUp = () => {
                 id="password"
                 name="password"
                 placeholder="Password"
-                minLength="8"
-                required />
-            </div>
-            <div className="error">
-              {errors.password && <p>{errors.password}</p>}
+                onChange={handleInputChange}
+                value={formData.password}
+              />
             </div>
 
             <div className="con-password">
@@ -119,12 +201,11 @@ const SignUp = () => {
               <input
                 type="password"
                 id="con-password"
-                name="con-password"
+                name="conPassword"
                 placeholder="Konfirmasi password"
-                required />
-            </div>
-            <div className="error">
-              {errors.conPassword && <p>{errors.conPassword}</p>}
+                onChange={handleInputChange}
+                value={formData.conPassword}
+              />
             </div>
 
             <div className="no-nik">
@@ -134,13 +215,12 @@ const SignUp = () => {
               <input
                 type="text"
                 id="no-nik"
-                name="no-nik"
+                name="noNIK"
                 placeholder="No NIK"
                 maxLength="16"
-                required />
-            </div>
-            <div className="error">
-              {errors.noNIK && <p>{errors.noNIK}</p>}
+                onChange={handleInputChange}
+                value={formData.noNIK}
+              />
             </div>
 
             <div className="cta">
@@ -148,13 +228,12 @@ const SignUp = () => {
               <input
                   type="checkbox"
                   id="cb-kebijakan"
-                  name="Setujui kebijakan" 
-                  required/>
+                  name="cbKebijakan" 
+                  onChange={handleInputChange}
+                  checked={formData.cbKebijakan}
+              />
                 <label htmlFor="setujui-kebijakan">Setujui kebijakan</label>
               </div>
-            </div>
-            <div className="error">
-              {errors.cbKebijakan && <p>{errors.cbKebijakan}</p>}
             </div>
 
             <button type="submit" id="submit">Register</button>
