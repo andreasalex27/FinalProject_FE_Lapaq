@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Swal from 'sweetalert2';
 import { addProduct } from '../../services/product';
 
 const AddProduct = () => {
+
   const [formData, setFormData] = useState({
-    img: '',
+    img: null,
     product: '',
     kategori: '',
     harga: '',
     jumlahStok: '',
     deskripsi: '',
   });
+
+  // Buat useRef untuk input file
+  const imageInputRef = useRef(null);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -20,17 +24,13 @@ const AddProduct = () => {
     });
   };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0]; // Mengambil file gambar
-    // Anda dapat menambahkan logika untuk mengunggah file ke sistem Anda di sini
-    // Misalnya, menggunakan FormData untuk mengirim file ke server
-
-    // Di sini, sebagai contoh, hanya menetapkan nama file ke dalam state formData
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
     setFormData({
       ...formData,
-      img: file.name, // Menetapkan nama file ke state formData
+      img: file,
     });
-  };
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -65,14 +65,17 @@ const AddProduct = () => {
     }
 
     try {
-      const response = await addProduct({
-        nama_produk: formData.product,
-        harga: formData.harga,
-        deskripsi: formData.deskripsi,
-        kategori: formData.kategori
-      });
+      const data = new FormData();
+      data.append('nama_produk', formData.product);
+      data.append('harga', formData.harga);
+      data.append('deskripsi', formData.deskripsi);
+      data.append('kategori', formData.kategori);
+      data.append('image', formData.img);
 
-      if (response && response.data) {
+      // Panggil fungsi addProduct dengan formData yang telah dibuat
+      const response = await addProduct(data);
+
+      if (response && response.message === 'data berhasil ditambahkan') {
         Swal.fire({
           position: "center",
           icon: "success",
@@ -84,13 +87,21 @@ const AddProduct = () => {
 
         // Clear form after successful submission
         setFormData({
-          img: '',
+          img: null,
           product: '',
           harga: '',
           jumlahStok: '',
           deskripsi: '',
           kategori: '',
         });
+
+        window.location.href = '/produk-saya';
+
+
+        // Reset input file value after successful submission
+      if (imageInputRef.current) {
+        imageInputRef.current.value = ''; // Atur kembali nilai input file ke kosong
+      }
       } else {
         throw new Error('Failed to add product');
       }
@@ -118,7 +129,7 @@ const AddProduct = () => {
                 <form onSubmit={handleSubmit}>
                     <div className='mb-3'>
                         <label htmlFor="img" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Gambar Produk</label>
-                        <input type="file" className="form-control" name="img" onChange={handleImageChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
+                        <input type="file" className="form-control" name="img" onChange={handleImageChange} ref={imageInputRef} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
                     </div>
 
                     <div className='mb-3'>
@@ -138,7 +149,10 @@ const AddProduct = () => {
 
                     <div className='mb-3'>
                         <label htmlFor="harga" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Harga Produk</label>
-                        <input type="number" className="form-control" name="harga" value={formData.harga} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
+                        <div className="input-group mb-3">
+                          <span className="input-group-text" id="basic-addon1" style={{ border: '2px solid #2B2A4C', height: '40px' }}>Rp</span>
+                          <input type="number" className="form-control" name="harga" value={formData.harga} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
+                        </div>
                     </div>
 
                     <div className='mb-3'>
