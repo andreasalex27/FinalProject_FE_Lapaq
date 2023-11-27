@@ -9,7 +9,6 @@ const AddProduct = () => {
     product: '',
     kategori: '',
     harga: '',
-    jumlahStok: '',
     deskripsi: '',
   });
 
@@ -39,7 +38,6 @@ const AddProduct = () => {
     if (
         formData.product === '' ||
         formData.harga === '' ||
-        formData.jumlahStok === '' ||
         formData.deskripsi === ''
     ) {
         Swal.fire({
@@ -95,7 +93,7 @@ const AddProduct = () => {
           kategori: '',
         });
 
-        window.location.href = '/produk-saya';
+        window.location.href = '/homepage/dashboard/produk-saya';
 
 
         // Reset input file value after successful submission
@@ -151,18 +149,13 @@ const AddProduct = () => {
                         <label htmlFor="harga" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Harga Produk</label>
                         <div className="input-group mb-3">
                           <span className="input-group-text" id="basic-addon1" style={{ border: '2px solid #2B2A4C', height: '40px' }}>Rp</span>
-                          <input type="number" className="form-control" name="harga" value={formData.harga} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
+                          <input type="number" className="form-control" name="harga" placeholder="Contoh: 25.000" value={formData.harga} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
                         </div>
                     </div>
 
                     <div className='mb-3'>
-                        <label htmlFor="jumlahStok" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Jumlah Stok Produk</label>
-                        <input type="number" className="form-control" name="jumlahStok" value={formData.jumlahStok} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
-                    </div>
-
-                    <div className='mb-3'>
                         <label htmlFor="deskripsi" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Deskripsi Produk</label>
-                        <textarea name="deskripsi" className="form-control" value={formData.deskripsi} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '200px' }}/>
+                        <textarea name="deskripsi" className="form-control" value={formData.deskripsi} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '280px' }}/>
                     </div>
 
                     <div className="d-grid gap-2 mt-4 mb-3">

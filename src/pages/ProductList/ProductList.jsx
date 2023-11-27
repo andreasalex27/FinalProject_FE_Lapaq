@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { productList } from "../../services/product";
 import { useNavigate } from "react-router-dom";
+import { Icon } from '@iconify/react';
+import { Link } from "react-router-dom";
 
 const ProductList = () => {
     const navigate = useNavigate();
@@ -28,7 +30,7 @@ const ProductList = () => {
   };
 
   const openAddProductPage = () => {
-    navigate("/produk-saya/tambah-produk");
+    navigate("/homepage/dashboard/produk-saya/tambah-produk");
   };
 
   return (
@@ -41,18 +43,25 @@ const ProductList = () => {
 
         <div className="product-list px-4 pt-4">
           {Array.isArray(products) && products.map((product) => (
-            <div key={product._id} className="product-card d-flex align-items-center mb-3 p-3" style={{boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)'}}>
-              <div className="image">
-                <img className="rounded" src={product.image} alt={product.nama_produk} width="70px" height="70px" onError={handleImageError}/>
-              </div>
-              <div className="title ms-3" style={{width: '225px'}}>
-                <h3 className="fs-6 mb-2 fw-bold" style={{color: '#2B2A4C'}}>{product.nama_produk}</h3>
-                <div className="d-flex justify-content-between align-items-center">
-                  <p className="mb-0">{product.harga}</p>
-                  <p className="mb-0" style={{color: '#EA906C'}}>100 stok</p>
+            <Link to={`/homepage/dashboard/produk-saya/produk/${product._id}`} className="text-decoration-none">
+              <div key={product._id} className="product-card d-flex align-items-center mb-3 p-3" style={{boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)'}}>
+                <div className="image">
+                  <img className="rounded" src={product.image} alt={product.nama_produk} width="70px" height="70px" onError={handleImageError}/>
+                </div>
+                <div className="title ms-3" style={{width: '225px'}}>
+                  <h3 className="fs-6 mb-2 fw-bold" style={{color: '#2B2A4C'}}>{product.nama_produk}</h3>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div style={{ color:"#ea906c" }}>
+                      <p className="mb-0"><span>Rp </span>{product.harga}</p>
+                    </div>
+                    <div className="d-flex align-items-center">
+                      <Icon icon="tabler:star-filled" color="#ea906c" width="17" height="17"/>
+                      <span className='fs-6 ms-1 fw-bold' style={{ color:"#ea906c" }}>{product.rating || <p className="mb-0">0,0</p>}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
