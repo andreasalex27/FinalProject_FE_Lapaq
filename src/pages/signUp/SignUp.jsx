@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import logo from "../../assets/lapaq-logo.png";
-import Swal from 'sweetalert2'
-import "./SignUp.css";
-import axios from 'axios'
+import Swal from 'sweetalert2';
 import { register } from '../../services/auth';
+import { Link } from "react-router-dom";
+import "./SignUp.css";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ const SignUp = () => {
   });
 
   const handleSubmit = async (e) => {
-    event.preventDefault();
+    e.preventDefault();
 
     const { namaDepan, namaBelakang, email, password, conPassword, noNIK, cbKebijakan } = formData;
 
@@ -97,7 +97,8 @@ const SignUp = () => {
           width: '300px',
           timer: '3000',
         });
-        // Redirect atau lakukan tindakan lain setelah login berhasil
+        
+        window.location.href = '/sign-in';
       } else {
         Swal.fire({
           icon: 'warning',
@@ -241,7 +242,7 @@ const SignUp = () => {
         </div>
 
         <div className="saran">
-          <span>Sudah punya akun? <a href="#">Log In</a></span>
+          <span>Sudah punya akun? <Link to={`/sign-in`}>Masuk</Link></span>
         </div>
 
       </div>

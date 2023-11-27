@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-import "./SignIn.css"
 import logo from '../../assets/lapaq-logo.png'
 import Swal from 'sweetalert2'
-import axios from 'axios'
-import {login} from "../../services/auth"
+import { Link } from "react-router-dom";
+import { login } from "../../services/auth"
+import "./SignIn.css"
 
 const SignIn = () => {
 
@@ -63,7 +63,8 @@ const SignIn = () => {
           width: '300px',
           timer: '3000',
         });
-        // Redirect atau lakukan tindakan lain setelah login berhasil
+        
+        window.location.href = '/homepage';
       } else {
         Swal.fire({
           icon: 'error',
@@ -142,7 +143,7 @@ const SignIn = () => {
           </form>
         </div>
         <div className="saran">
-          <span>Belum punya akun? <a href="#">Daftar</a></span>
+          <span>Belum punya akun? <Link to={`/sign-up`}>Daftar</Link></span>
         </div>
       </div>
     </div>
