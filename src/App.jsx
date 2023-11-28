@@ -1,7 +1,7 @@
-import routePrivate from "./routes/private/Router";
+import RoutePublic from "./routes/public/RouterPublic";
 
 const App = () => {
-  return <routePrivate />;
+  return <RoutePublic />;
 };
 
 export default App;
