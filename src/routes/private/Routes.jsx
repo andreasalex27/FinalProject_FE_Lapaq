@@ -1,3 +1,6 @@
+import {Route, Routes} from 'react-router-dom';
+import Dashboard from '../../pages/Dashboard/Dashboard';
+import SellerLayout from '../../layouts/SellerLayout';
 import { Route, Routes } from 'react-router-dom';
 import ShopRegister from '../../pages/ShopRegister/ShopRegister';
 
@@ -6,8 +9,11 @@ const ROUTE_LIST = [
     {
         path: '/daftar-toko',
         element: <ShopRegister/>,
-    },
-      
+    }, 
+    {
+        path: '/homepage/dashboard',
+        element: <SellerLayout><Dashboard/></SellerLayout>,
+    } 
 ];
 
 const AppRouter = () => {
