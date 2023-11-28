@@ -3,15 +3,17 @@ import Homepage from '../../pages/Homepage/Homepage';
 import ShopRegister from '../../pages/ShopRegister/ShopRegister';
 import BuyerLayout from '../../layouts/BuyerLayout';
 
+
 const ROUTE_LIST = [
     {
         path: '/homepage',
         element: <BuyerLayout><Homepage/></BuyerLayout>,
     },
     {
-        path: '/daftar-toko',
+        path: '/homepage/daftar-toko',
         element: <ShopRegister />,
     }    
+
 ];
 
 const RoutePrivate = () => {

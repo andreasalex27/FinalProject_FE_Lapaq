@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
-import { productList } from '../../services/product';
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { productList } from '../../services/product';
 
 const Homepage = () => {
   const [products, setProducts] = useState([]);
@@ -23,6 +24,7 @@ const Homepage = () => {
     fetchData();
   }, []);
 
+  // Mengelompokkan produk berdasarkan kategori
   const groupedProducts = products.reduce((grouped, product) => {
     if (!grouped[product.kategori]) {
       grouped[product.kategori] = [];
@@ -67,14 +69,16 @@ const Homepage = () => {
               </div>
             </Link>
 
+
             <Link to="/dashboard/transaki" className='text-decoration-none'>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div className="bg-white rounded d-flex justify-content-center align-items-center" style={{ height: "40px", width: "40px" }}>
-                  <Icon icon="icon-park-solid:transaction-order" color="#2b2a4c" width="25" />
+                  <Icon icon="icon-park-solid:transaction-order" color="#2b2a4c" width="25" /
                 </div>
                 <p className="mt-2 fw-bold" style={{fontSize: "12px", color:"#2b2a4c"}}>Transaksi</p>
               </div>
             </Link>
+
 
             <Link to="/dashboard/keranjang" className='text-decoration-none'>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -85,6 +89,7 @@ const Homepage = () => {
               </div>
             </Link>
 
+
             <Link to="/dashboard/pesanan" className='text-decoration-none'>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div className="bg-white rounded d-flex justify-content-center align-items-center" style={{ height: "40px", width: "40px" }}>
@@ -93,7 +98,6 @@ const Homepage = () => {
                 <p className="mt-2 fw-bold" style={{fontSize: "12px", color:"#2b2a4c"}}>Pesanan</p>
               </div>
             </Link>
-
           </div>
         </div>
       </div>
