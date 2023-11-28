@@ -38,4 +38,3 @@ export {
   login,
   register,
   shopRegister
-}
