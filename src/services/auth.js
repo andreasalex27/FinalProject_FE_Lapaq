@@ -23,8 +23,18 @@ const register = async (body) => {
   }
 }
 
+const shopRegister = async (body) => {
+    try {
+        const response = await axios.post('http://localhost:3000/register/seller',body);
+        console.log(response.data);
+        return response.data;     
+      } catch (error) {
+        console.error('Gagal menyimpan data ke server:', error);
+        return null;
+      }
+}
 
 export {
   login,
-  register
-}
+  register,
+  shopRegister
