@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import SearchBar from '../../components/SearchPage';
+import SearchBar from '../../components/SearchBar';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { productId } from '../../services/product';
