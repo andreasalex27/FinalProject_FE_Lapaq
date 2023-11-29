@@ -73,7 +73,7 @@ const Homepage = () => {
             <Link to="/dashboard/transaki" className='text-decoration-none'>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div className="bg-white rounded d-flex justify-content-center align-items-center" style={{ height: "40px", width: "40px" }}>
-                  <Icon icon="icon-park-solid:transaction-order" color="#2b2a4c" width="25" /
+                  <Icon icon="icon-park-solid:transaction-order" color="#2b2a4c" width="25"/>
                 </div>
                 <p className="mt-2 fw-bold" style={{fontSize: "12px", color:"#2b2a4c"}}>Transaksi</p>
               </div>
