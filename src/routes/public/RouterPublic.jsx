@@ -1,23 +1,21 @@
-import {Route, Routes} from 'react-router-dom';
-import LandingLayout from '../layouts/LandingLayout.jsx';
-import LandingPage from '../pages/LandingPage/LandingPage.jsx';
-import SignIn from '../pages/SignIn/SignIn.jsx';
-import SignUp from '../pages/SignUp/SignUp.jsx'
-
+import { Route, Routes } from 'react-router-dom';
+import LandingPage from '../../pages/LandingPage/LandingPage';
+import SignIn from '../../pages/SignIn/SignIn';
+import SignUp from '../../pages/SignUp/SignUp';
 
 
 const ROUTE_LIST = [
     {
-        path: '/',
-        element: <LandingLayout><LandingPage/></LandingLayout>,
+        path: '/welcome',
+        element: <LandingPage/>,
     },
     {
         path: '/sign-in',
-        element: <SignIn />,
+        element: <SignIn/>,
     },
     {
         path: '/sign-up',
-        element: <SignUp />,
+        element: <SignUp/>,
     }
       
 ];
