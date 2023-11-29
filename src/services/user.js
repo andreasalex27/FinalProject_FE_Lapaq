@@ -11,6 +11,18 @@ const buyerId = async (_id) => {
       }
 }
 
+const editBuyerId = async (_id) => {
+  try {
+      const response = await axios.patch(`http://localhost:3000/api/users/${_id}`);
+      console.log(response.data);
+      return response.data;     
+  } catch (error) {
+      console.error('Gagal update data ke server:', error);
+      return null;
+  }
+}
+
 export {
-  buyerId
+  buyerId,
+  editBuyerId
 }
