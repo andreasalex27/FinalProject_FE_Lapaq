@@ -1,35 +1,15 @@
 import {Route, Routes} from 'react-router-dom';
-import BuyerLayout from '../../layouts/BuyerLayout';
-import CatalogProduct from '../../pages/CatalogProduct/CatalogProduct';
-import Checkout from '../../pages/Checkout/Checkout';
-import SearchPage from '../../pages/SearchPage/SearchPage';
-import Homepage from '../../pages/Homepage/Homepage';
-import ShopRegister from '../../pages/ShopRegister/ShopRegister';
+import Dashboard from '../../pages/Dashboard/Dashboard';
+import SellerLayout from '../../layouts/SellerLyout/SellerLayout';
 
 const ROUTE_LIST = [
-    { 
-        path: '/homepage',
-        element: <BuyerLayout><Homepage/></BuyerLayout>,
-    },
     {
-        path: '/homepage/daftar-toko',
-        element: <ShopRegister />,
-    },  
-    {
-        path: '/homepage/search',
-        element: <SearchPage/>,
-    },
-    {
-        path: '/homepage/search/produk/:_id',
-        element: <BuyerLayout><CatalogProduct/></BuyerLayout>,
-    }, 
-    {
-        path: '/homepage/search/produk/checkout/:_id',
-        element: <Checkout/>,
-    }  
+        path: '/homepage/dashboard',
+        element: <SellerLayout><Dashboard/></SellerLayout>,
+    } 
 ];
 
-const RoutePrivate = () => {
+const AppRouter = () => {
     return (
         <Routes>
             {ROUTE_LIST.map((route, index) => (
@@ -43,4 +23,4 @@ const RoutePrivate = () => {
     );
 };
 
-export default RoutePrivate;
+export default AppRouter;
