@@ -1,14 +1,7 @@
-import { useState } from 'react'
-import './App.css'
+import RoutePrivate from "./routes/private/Router";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  return <RoutePrivate />;
+};
 
-  return (
-    <>
-      
-    </>
-  )
-}
-
-export default App
+export default App;
