@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { register } from '../../services/auth';
 import Swal from 'sweetalert2'
+import '../SignUp/SignUp.css'
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -72,8 +75,7 @@ const SignUp = () => {
       return;
     }
 
-    // Lakukan tindakan setelah registrasi berhasil
-    console.log('Data valid. Melanjutkan proses registrasi...');
+    //console.log('Data valid. Melanjutkan proses login...');
 
     try {
       const result = await register({
@@ -131,7 +133,7 @@ const SignUp = () => {
       <div className="container" style={{ maxWidth: '390px', backgroundColor: 'white', height: '100%'}}>
 
         <div className="logo" style={{height: '200px'}}>
-          <img src={logo} alt="logo lapaq" style={{width: "30%"}}/>
+          <img src="https://i.imgur.com/OXNQ3Sf.png" alt="logo lapaq" style={{width: "30%"}}/>
         </div>
 
         <div className="form-daftar">
@@ -237,7 +239,7 @@ const SignUp = () => {
         </div>
 
         <div className="saran">
-          <span>Sudah punya akun? <a href="#">Log In</a></span>
+          <span>Sudah punya akun? <Link to='/welcome/sign-in'>Log In</Link></span>
         </div>
 
       </div>
