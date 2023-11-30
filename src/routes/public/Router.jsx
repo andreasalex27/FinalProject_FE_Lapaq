@@ -1,26 +1,15 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import LandingPage from '../../pages/LandingPage/LandingPage';
-import SignIn from '../../pages/SignIn/SignIn';
-import SignUp from '../../pages/SignUp/SignUp';
-
 
 const ROUTE_LIST = [
     {
         path: '/welcome',
         element: <LandingPage/>,
-    },
-    {
-        path: '/sign-in',
-        element: <SignIn/>,
-    },
-    {
-        path: '/sign-up',
-        element: <SignUp/>,
-    }
-      
+    }   
 ];
 
-const AppRouter = () => {
+const RoutePublic = () => {
     return (
         <Routes>
             {ROUTE_LIST.map((route, index) => (
@@ -34,4 +23,4 @@ const AppRouter = () => {
     );
 };
 
-export default AppRouter;
+export default RoutePublic;

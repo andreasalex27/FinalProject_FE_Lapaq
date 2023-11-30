@@ -36,11 +36,11 @@ const LandingPage = () => {
   const defaultImageUrl = 'https://i.imgur.com/2a0RWOy.jpg';
 
   const openSigninPage = () => {
-    navigate("/sign-in");
+    navigate("/welcome/sign-in");
   };
 
   const openSignupPage = () => {
-    navigate("/sign-up");
+    navigate("/welcome/sign-up");
   };
 
   return (
@@ -129,8 +129,8 @@ const LandingPage = () => {
 
                 <div className='row row-cols-1 row-cols-md-2 g-2 px-2'>
                   {groupedProducts[kategori].map(product => (
-                    <div className='col m-0 p-0'>
-                      <div className='card my-2 m-2' key={product._id} style={{height: '280px'}}>
+                    <div className='col m-0 p-0' key={product._id}>
+                      <div className='card my-2 m-2' style={{height: '280px'}}>
                         <img src={product.image || defaultImageUrl} alt={product.nama_produk} className="card-img-top" style={{objectFit: 'cover'}} width="120px"/>
                         <div className="card-body">
                           <h5 style={{ fontSize: "14px" }} className="card-title fw-semibold">{product.nama_produk}</h5>
