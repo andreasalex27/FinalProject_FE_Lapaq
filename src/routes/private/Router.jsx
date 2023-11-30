@@ -1,17 +1,17 @@
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
-import OrderCancel from '../../pages/OrderCancel/OrderCancel';
+import OrderReturn from '../../pages/OrderReturn/OrderReturn';
 import OrderHistoryLayout from '../../layouts/OrderHistoryLayout';
-import OrderCancelSuccess from '../../pages/OrderCancelSuccess/OrderCancelSuccess';
+import OrderReturnSuccess from '../../pages/OrderReturnSuccess/OrderReturnSuccess';
 
 const ROUTE_LIST = [
     {
-        path: '/homepage/dashboard/riwayat/pembatalan',
-        element: <OrderHistoryLayout><OrderCancel/></OrderHistoryLayout>,
+        path: '/homepage/dashboard/riwayat/pengembalian',
+        element: <OrderHistoryLayout><OrderReturn/></OrderHistoryLayout>,
     },
     {
-        path: '/homepage/dashboard/riwayat/pembatalan/selesai/:_id',
-        element: <OrderCancelSuccess/>,
+        path: '/homepage/dashboard/riwayat/pengembalian/selesai/:_id',
+        element: <OrderReturnSuccess/>,
     },        
 ];
 

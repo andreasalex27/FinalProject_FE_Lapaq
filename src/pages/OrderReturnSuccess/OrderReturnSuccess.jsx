@@ -3,10 +3,11 @@ import { productId } from '../../services/product';
 import { useParams } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 
-const OrderCancelSuccess = () => {
+const OrderReturnSuccess = () => {
     const [product, setProduct] = useState({
         nama_produk: '',
-        harga: ''
+        harga: '',
+        image: ''
     });
 
     const { _id } = useParams();
@@ -30,30 +31,16 @@ const OrderCancelSuccess = () => {
         fetchData();
     }, [_id]);
 
-    const dotStyle = {
-        height: '10px',
-        width: '10px',
-        backgroundColor: '#EA906C',
-        borderRadius: '50%',
-        display: 'inline-block',
-        marginRight: '10px',
-      };
-    
-      const listStyle = {
-        listStyleType: 'none',
-        paddingLeft: '20px',
-      };
-
     return (
         <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px', height: '100vh' }}>
             <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto', height: '100%' }}>
                 <div className='pt-4 pb-1' style={{boxShadow: '0 3px 3px rgba(0, 0, 0, 0.5)', marginBottom: '3px'}}>
-                    <p className='text-center fs-6 fw-bold' style={{color: '#B31312'}}>Pembatalan Selesai</p>
+                    <p className='text-center fs-6 fw-bold' style={{color: '#B31312'}}>Pengembalian Selesai</p>
                 </div>
 
                 <div className='text-center mt-4'>
                     <Icon icon="lets-icons:check-fill" color="#2b2a4c" width="100"/>
-                    <p className='fs-6 fw-bold' style={{color: "#2B2A4C"}}>Pembatalan Selesai</p>
+                    <p className='fs-6 fw-bold' style={{color: "#2B2A4C"}}>Pengembalian Selesai</p>
                 </div>
 
                 <div className='mx-5 mb-5 px-3 py-4 rounded' style={{boxShadow: '0 3px 3px rgba(0, 0, 0, 0.5)'}}>
@@ -74,18 +61,18 @@ const OrderCancelSuccess = () => {
                     </div>
                 </div>
 
-                <div class="d-grid gap-2 mx-5">
-                    <div className='rounded d-flex justify-content-center align-items-center py-1' style={{backgroundColor: '#B31312'}}>
-                        <p className='text-white fw-bold fs-6 mb-0'>Pesanan ditolak penjual</p>
-                    </div>
-                    <div className='rounded d-flex justify-content-center align-items-center py-1' style={{backgroundColor: '#EA906C'}}>
-                        <p className='text-white fw-bold fs-6 mb-0'>Pesanan ditolak pembeli</p>
-                    </div>
+                <div className='mx-5 mt-3'>
+                    <p className='fw-bold mb-0' style={{color: '#2B2A4C', fontSize: '14px'}}>Alasan pembeli</p>
+                    <p style={{textAlign: 'justify'}}>Barang yang diterima dalam keadaan kurang baik, saya menerima keadaan barang yang cacat. Mungkin anda tidak melakukan penggecekan terlebih dahulu. Saya harap dapat mengembalikan barang ini dan mendapatkan uang saya kembali</p>
                 </div>
 
                 <div className='mx-5 mt-3'>
-                    <p className='fw-bold mb-0' style={{color: '#2B2A4C', fontSize: '14px'}}>Alasan penjual menolak pesanan</p>
-                    <p style={{textAlign: 'justify'}}>Jumlah stok yang dibeli telah habis. Mohon maaf atas ketidaknyamanannya, kemi ternyata belum memperbaharui jumlah stok produk tersebut.</p>
+                    <p className='fw-bold mb-0' style={{color: '#2B2A4C', fontSize: '14px'}}>Bukti keliruan</p>
+                    <div className='d-flex'>
+                        <img src={product.image} className='rounded me-2' width="50px" height="50px"/>
+                        <img src={product.image} className='rounded me-2' width="50px" height="50px"/>
+                        <img src={product.image} className='rounded' width="50px" height="50px"/>
+                    </div>
                 </div>
 
             </div>
@@ -94,4 +81,4 @@ const OrderCancelSuccess = () => {
     )
 }
 
-export default OrderCancelSuccess;
+export default OrderReturnSuccess;

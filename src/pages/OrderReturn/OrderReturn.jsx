@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { productList } from '../../services/product';
 import { Link } from 'react-router-dom';
 
-const OrderCancel = () => {
+const OrderReturn = () => {
   const [products, setProducts] = useState([]);
   const [activeFilter, setActiveFilter] = useState('Proses');
 
@@ -41,7 +41,7 @@ const OrderCancel = () => {
   return (
     <>
       <div className='pt-4 pb-1' style={{boxShadow: '0 3px 3px rgba(0, 0, 0, 0.5)', marginBottom: '3px'}}>
-        <p className='text-center fs-6 fw-bold' style={{color: '#B31312'}}>Pembatalan Pesanan</p>
+        <p className='text-center fs-6 fw-bold' style={{color: '#B31312'}}>Pengembalian Pesanan</p>
       </div>
       <div className='filter-buttons d-flex justify-content-around mt-3 mb-0'>
         <button onClick={() => setActiveFilter('Proses')} style={activeFilter === 'Proses' ? { backgroundColor: '#2B2A4C', color: '#fff', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px', marginRight: '5px', width: '150px' } : { backgroundColor: '#fff', color: '#2B2A4C', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px', marginRight: '5px', width: '150px', border: 'none'  }}>Proses</button>
@@ -80,7 +80,7 @@ const OrderCancel = () => {
         <div className='row g-2 px-2'>
           {products.map(product => (
             <div key={product._id} className='card mb-1 py-3 px-2 border border-0' style={{ boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)' }}>
-              <Link to={`/homepage/dashboard/riwayat/pembatalan/selesai/${product._id}`} className="text-decoration-none">
+              <Link to={`/homepage/dashboard/riwayat/pengembalian/selesai/${product._id}`} className="text-decoration-none">
                 <div className='row g-0 d-flex align-items-center'>
                   <div className='col-md-2 d-flex align-items-center'>
                     <img src={product.image || defaultImageUrl} alt={product.nama_produk} className="rounded" style={{ height: "60px", width: "60px" }} />
@@ -103,4 +103,4 @@ const OrderCancel = () => {
   );
 };
 
-export default OrderCancel;
+export default OrderReturn;
