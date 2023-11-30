@@ -1,21 +1,21 @@
-import { Route, Routes } from 'react-router-dom';
-import AddProduct from '../../pages/AddProduct/AddProduct';
-import ProductList from '../../pages/ProductList/ProductList';
-
+import React from 'react';
+import {Route, Routes} from 'react-router-dom';
+import OrderProcess from '../../pages/OrderProcess/OrderProcess';
+import OrderHistoryLayout from '../../layouts/OrderHistoryLayout';
+import OrderProcessSuccess from '../../pages/OrderProcessSuccess/OrderProcessSuccess';
 
 const ROUTE_LIST = [
     {
-        path: '/homepage/dashboard/produk-saya',
-        element: <ProductList/>,
+        path: '/homepage/dashboard/riwayat/pemrosesan',
+        element: <OrderHistoryLayout><OrderProcess/></OrderHistoryLayout>,
     },
     {
-        path: '/homepage/dashboard/produk-saya/tambah-produk',
-        element: <AddProduct/>,
-    }
-      
+        path: '/homepage/dashboard/riwayat/pemrosesan/selesai/:_id',
+        element: <OrderProcessSuccess/>,
+    },        
 ];
 
-const AppRouter = () => {
+const RoutePrivate = () => {
     return (
         <Routes>
             {ROUTE_LIST.map((route, index) => (
@@ -29,4 +29,4 @@ const AppRouter = () => {
     );
 };
 
-export default AppRouter;
+export default RoutePrivate;
