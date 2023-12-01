@@ -1,19 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { shopRegister } from '../../services/auth';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const clNavy = {
-  color: "#2B2A4C",
-  fontWeight: "bold"
-};
-const bdNavy = {
-  borderColor: "#2B2A4C",
-  borderWidth: "1px",
-  borderStyle: "solid",
-};
-
 const ShopRegister = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     namaToko: '',
     alamatToko: '',
@@ -61,7 +53,7 @@ const ShopRegister = () => {
     }
 
     // Lakukan tindakan setelah registrasi berhasil
-    console.log('Data valid. Melanjutkan proses registrasi...');
+    //console.log('Data valid. Melanjutkan proses registrasi...');
 
     try {
       const result = await shopRegister({
@@ -82,11 +74,12 @@ const ShopRegister = () => {
           timer: '3000',
         });
         
-        window.location.href = '/toko-saya';
+        navigate('/dashboard');
+
       } else {
         Swal.fire({
           icon: 'warning',
-          title: '<span style="font-size: 16px; color: red;">Email telah terdaftar</span>',
+          title: '<span style="font-size: 16px; color: red;">Gagal daftar toko</span>',
           showConfirmButton: false,
           width: '300px',
           timer: '3000',
@@ -109,7 +102,15 @@ const ShopRegister = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-
+  const clNavy = {
+    color: "#2B2A4C",
+    fontWeight: "bold"
+  };
+  const bdNavy = {
+    borderColor: "#2B2A4C",
+    borderWidth: "1px",
+    borderStyle: "solid",
+  };
 
   return (
     <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', overflow: 'auto'}}>

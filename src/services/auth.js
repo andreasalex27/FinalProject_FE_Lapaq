@@ -38,3 +38,4 @@ export {
   login,
   register,
   shopRegister
+}
