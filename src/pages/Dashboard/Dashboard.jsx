@@ -31,6 +31,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
+            {/*
             <div className="icons-container d-flex justify-content-between text-items-center m-3 py-3 px-3">
                 <Link to="/homepage/dashboard/produk-saya" className="text-decoration-none">
                     <div className="icon-item text-center ms-3">
@@ -60,33 +61,34 @@ const Dashboard = () => {
                     </div>
                 </Link>
             </div>
+            */}
 
             <div className='m-3'>
                 <p className="fw-bold mb-2" style={{color: '#b31312', fontSize: '13px'}}>Riwayat Pesanan</p>
                 <div className="icons-container d-flex justify-content-between text-items-center pt-3 rounded" style={{backgroundColor: "#EEE2DE"}}>
 
-                    <Link to="/homepage/dashboard/pesanan/pemrosesan" className="text-decoration-none">
+                    <Link to="/homepage/dashboard/riwayat/pemrosesan" className="text-decoration-none">
                         <div className="icon-item text-center ms-3">
                             <Icon icon="lucide:package" color="#2b2a4c" width="30" />                            
                             <p className="icon-text fw-bold mt-1" style={{color: '#2b2a4c', fontSize: '10px'}}>Pemrosesan</p>
                         </div>
                     </Link>
 
-                    <Link to="/homepage/dashboard/pesanan/pembatalan" className="text-decoration-none">
+                    <Link to="/homepage/dashboard/riwayat/pembatalan" className="text-decoration-none">
                         <div className="icon-item text-center">
                             <Icon icon="lucide:package-x" color="#2b2a4c" width="30" />                            
                         <p className="icon-text fw-bold mt-1" style={{color: '#2b2a4c', fontSize: '10px'}}>Pembatalan</p>
                         </div>
                     </Link>
 
-                    <Link to="/homepage/dashboard/pesanan/pengembalian" className="text-decoration-none">
+                    <Link to="/homepage/dashboard/riwayat/pengembalian" className="text-decoration-none">
                         <div className="icon-item text-center">
                             <Icon icon="octicon:package-dependencies-16" color="#2b2a4c" width="30" height="30" />                            
                             <p className="icon-text fw-bold mt-1" style={{color: '#2b2a4c', fontSize: '10px'}}>Pengembalian</p>
                         </div>
                     </Link>
 
-                    <Link to="/homepage/dashboard/pesanan/penilaian" className="text-decoration-none">
+                    <Link to="/homepage/dashboard/riwayat/penilaian" className="text-decoration-none">
                         <div className="icon-item text-center me-3">
                             <Icon icon="ic:outline-rate-review" color="#2b2a4c" width="30" />                            
                             <p className="icon-text fw-bold mt-1" style={{color: '#2b2a4c', fontSize: '10px'}}>Penilaian</p>

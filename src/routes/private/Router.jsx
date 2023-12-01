@@ -9,7 +9,7 @@ const ROUTE_LIST = [
     } 
 ];
 
-const AppRouter = () => {
+const RoutePrivate = () => {
     return (
         <Routes>
             {ROUTE_LIST.map((route, index) => (
@@ -23,4 +23,4 @@ const AppRouter = () => {
     );
 };
 
-export default AppRouter;
+export default RoutePrivate;
