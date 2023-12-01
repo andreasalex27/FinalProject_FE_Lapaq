@@ -1,10 +1,8 @@
 import React, {useState} from 'react'
-import "./SignIn.css"
-import logo from '../../assets/lapaq-logo.png'
 import Swal from 'sweetalert2'
-import axios from 'axios'
-import {login} from "../../services/auth"
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { login } from '../../services/auth';
+import '../SignIn/SignIn.css'
 
 const SignIn = () => {
 
@@ -95,7 +93,7 @@ const SignIn = () => {
 
       <div className="container d-flex flex-column justify-content-between" style={{ maxWidth: '390px', backgroundColor: 'white', height: '100%', paddingTop: '10vh', paddingBottom: '10vh'}}>
         <div className="logo">
-          <img src={logo} alt="logo lapaq" />
+          <img src='https://i.imgur.com/OXNQ3Sf.png' alt="logo lapaq" />
         </div>
         <div className="form-login">
           <h3 id="login">Log In</h3>
@@ -143,7 +141,7 @@ const SignIn = () => {
           </form>
         </div>
         <div className="saran">
-          <span>Belum punya akun? <Link to={`/sign-up`}>Daftar</Link> </span>
+          <span>Belum punya akun? <Link to='/welcome/sign-up'>Daftar</Link></span>
         </div>
       </div>
     </div>
