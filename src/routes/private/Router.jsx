@@ -1,23 +1,11 @@
 import {Route, Routes} from 'react-router-dom';
 import SearchPage from '../../pages/SearchPage/SearchPage';
-import Homepage from '../../pages/Homepage/Homepage';
-import ShopRegister from '../../pages/ShopRegister/ShopRegister';
-import BuyerLayout from '../../layouts/BuyerLayout';
 
 const ROUTE_LIST = [
-    {
-        path: '/homepage',
-        element: <BuyerLayout><Homepage/></BuyerLayout>,
-    },
     {
         path: '/homepage/search',
         element: <SearchPage/>,
     },
-    {
-        path: '/homepage/daftar-toko',
-        element: <ShopRegister />,
-    }    
-
 ];
 
 const RoutePrivate = () => {
