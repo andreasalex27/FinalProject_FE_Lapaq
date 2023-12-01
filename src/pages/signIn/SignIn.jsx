@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import Swal from 'sweetalert2'
-import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../services/auth';
 import '../SignIn/SignIn.css'
 
 const SignIn = () => {
-
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -48,40 +49,42 @@ const SignIn = () => {
     } else {
 
       try {
-      const result = await login({
-        email: username,
-        password: password,
-      });
-
-      // Cek hasil dari permintaan ke server
-      if (result) {
-        Swal.fire({
-          icon: 'success',
-          title: '<span style="font-size: 16px; color: green;">Berhasil login</span>',
-          showConfirmButton: false,
-          width: '300px',
-          timer: '3000',
+        const result = await login({
+          email: username,
+          password: password,
         });
-        // Redirect atau lakukan tindakan lain setelah login berhasil
-      } else {
+    
+        // Cek hasil dari permintaan ke server
+        if (result && result.payload && result.payload.token) {
+          const token = result.payload.token;
+          Cookies.set('token', token, { expires: 10 }); // Simpan token ke dalam cookies
+          Swal.fire({
+            icon: 'success',
+            title: '<span style="font-size: 16px; color: green;">Berhasil login</span>',
+            showConfirmButton: false,
+            width: '300px',
+            timer: '3000',
+          });
+          navigate('/homepage');
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: '<span style="font-size: 16px; color: red;">Username atau password salah</span>',
+            showConfirmButton: false,
+            width: '300px',
+            timer: '3000',
+          });
+        }
+      } catch (error) {
+        console.error('Error:', error);
         Swal.fire({
           icon: 'error',
-          title: '<span style="font-size: 16px; color: red;">username atau password salah</span>',
+          title: '<span style="font-size: 16px; color: red;">Gagal login</span>',
           showConfirmButton: false,
           width: '300px',
           timer: '3000',
         });
       }
-    } catch (error) {
-      console.error('Error:', error);
-      Swal.fire({
-        icon: 'error',
-        title: '<span style="font-size: 16px; color: red;">Gagal login</span>',
-        showConfirmButton: false,
-        width: '300px',
-        timer: '3000',
-      });
-    }
   
       // Redirect atau tindakan lain setelah login berhasil
     }

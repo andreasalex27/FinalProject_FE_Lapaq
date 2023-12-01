@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { shopRegister } from '../../services/auth';
 import Swal from 'sweetalert2';
+import Cookies from 'js-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ShopRegister = () => {
@@ -13,6 +14,14 @@ const ShopRegister = () => {
     password: '',
     pinToko: '',
   });
+
+  React.useEffect(() => {
+    const token = Cookies.get('token');
+    if (!token) {
+      navigate('/welcome/signin'); // Jika token tidak tersedia, arahkan pengguna kembali ke halaman login
+    }
+    console.log(token)
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

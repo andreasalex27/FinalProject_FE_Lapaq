@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { register } from '../../services/auth';
 import Swal from 'sweetalert2'
 import '../SignUp/SignUp.css'
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     namaDepan: '',
     namaBelakang: '',
@@ -95,7 +96,7 @@ const SignUp = () => {
           width: '300px',
           timer: '3000',
         });
-        // Redirect atau lakukan tindakan lain setelah login berhasil
+        navigate('/welcome/sign-in');
       } else {
         Swal.fire({
           icon: 'warning',
