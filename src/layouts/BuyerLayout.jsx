@@ -19,8 +19,8 @@ const BuyerLayout = ({ children }) => {
                     <Link to="/homepage/daftar-toko">
                         <Icon icon="material-symbols:team-dashboard" color="#b31312" width="30" />
                     </Link>
-                    <Link to="/homepage/chat">
-                        <Icon icon="material-symbols:chat" color="#b31312" width="30" />  
+                    <Link to="/homepage/riwayat">
+                        <Icon icon="icon-park-solid:buy" color="#b31312" width="30" />  
                     </Link>
                     <Link to="/homepage/profile">
                         <Icon icon="iconamoon:profile-fill" color="#b31312" width="30" />            

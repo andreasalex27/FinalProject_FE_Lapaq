@@ -46,7 +46,7 @@ const Carts = () => {
                     <p className="card-text" style={{color: '#2B2A4C', fontSize: "14px"}}><span>Rp </span>{product.harga}</p>
                   </div>
                   <div className='d-flex justify-content-between align-items-center'>
-                    <Link to={`/homepage/seproduk/${product._id}`} className="btn btn-sm fw-bold text-white" style={{backgroundColor: '#B31312'}}>Checkout</Link>
+                    <Link to={`/homepage/search/produk/checkout/${product._id}`} className="btn btn-sm fw-bold text-white" style={{backgroundColor: '#B31312'}}>Checkout</Link>
                   </div>
                 </div>
               </div>
