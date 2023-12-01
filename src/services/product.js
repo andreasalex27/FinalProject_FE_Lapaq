@@ -48,9 +48,21 @@ const editProductId = async (_id) => {
   }
 }
 
+const deleteProductId = async (_id) => {
+  try {
+      const response = await axios.delete(`http://localhost:3000/api/produk/${_id}`);
+      console.log(response.data);
+      return response.data;     
+  } catch (error) {
+      console.error('Gagal delete data ke server:', error);
+      return null;
+  }
+}
+
 export {
   productList,
   productId,
   addProduct,
-  editProductId
+  editProductId, 
+  deleteProductId
 }

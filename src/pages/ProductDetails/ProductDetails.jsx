@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-import { productId } from '../../services/product';
-import { useParams } from 'react-router-dom';
+import { productId, deleteProductId } from '../../services/product';
+import { useParams, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const ProductDetails = () => {
+    const navigate = useNavigate();
     const [product, setProduct] = useState({
         image: 'https://i.imgur.com/2a0RWOy.jpg',
         nama_produk: '',
@@ -29,6 +31,40 @@ const ProductDetails = () => {
     
         fetchData();
     }, [_id]);
+
+    const handleDeleteProduct = async () => {
+        try {
+            const response = await deleteProductId(_id);
+            if (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '<span style="font-size: 16px; color: green;">Produk berhasil dihapus</span>',
+                    showConfirmButton: false,
+                    width: '300px',
+                    timer: '3000',
+                }).then(() => {
+                    navigate('/homepage/dashboard/produk-saya');
+                });
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '<span style="font-size: 16px; color: red;">Gagal menghapus produk</span>',
+                    showConfirmButton: false,
+                    width: '300px',
+                    timer: '3000',
+                });
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: '<span style="font-size: 16px; color: red;">Gagal menghapus produk</span>',
+                showConfirmButton: false,
+                width: '300px',
+                timer: '3000',
+            });
+        }
+    };
 
   return (
     <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px'}}>
@@ -66,7 +102,7 @@ const ProductDetails = () => {
                         <button className="btn text-white fw-bold" type="button" style={{backgroundColor: '#b31312'}}>
                             <Link to={`/homepage/dashboard/produk-saya/detail/edit/${product._id}`} className='text-decoration-none text-white'>Edit Produk</Link>
                         </button>
-                        <button className="btn text-white fw-bold" type="button" style={{backgroundColor: '#ea906c', color: '#b31312'}}>Delete Produk
+                        <button className="btn text-white fw-bold" type="button" style={{backgroundColor: '#ea906c', color: '#b31312'}} onClick={handleDeleteProduct}>Delete Produk
                         </button>
                     </div>
                 </div>
