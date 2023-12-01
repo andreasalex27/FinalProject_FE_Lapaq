@@ -13,16 +13,16 @@ const BuyerLayout = ({ children }) => {
                     <Link to="/homepage">
                         <Icon icon="ep:menu" color="#b31312" width="30" />
                     </Link>
-                    <Link to="/keranjang">
+                    <Link to="/homepage/keranjang">
                         <Icon icon="mdi:cart" color="#b31312" width="30" />
                     </Link>
-                    <Link to="/daftar-toko">
+                    <Link to="/homepage/daftar-toko">
                         <Icon icon="material-symbols:team-dashboard" color="#b31312" width="30" />
                     </Link>
-                    <Link to="/chat">
-                        <Icon icon="material-symbols:chat" color="#b31312" width="30" />  
+                    <Link to="/homepage/riwayat">
+                        <Icon icon="icon-park-solid:buy" color="#b31312" width="30" />  
                     </Link>
-                    <Link to="/profile">
+                    <Link to="/homepage/profile">
                         <Icon icon="iconamoon:profile-fill" color="#b31312" width="30" />            
                     </Link>
                 </div>
