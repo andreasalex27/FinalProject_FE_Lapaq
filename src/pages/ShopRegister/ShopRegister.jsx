@@ -4,45 +4,35 @@ import { shopRegister } from '../../services/auth';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { getUserToken } from '../../utils/jwt';
 
 const ShopRegister = () => {
   const navigate = useNavigate()
+  const [tokenUser, setTokenUser] = useState(null)
   const [formData, setFormData] = useState({
     namaToko: '',
     alamatToko: '',
-    email: '',
-    password: '',
     pinToko: '',
   });
 
-  React.useEffect(() => {
-    const token = Cookies.get('token');
-    if (!token) {
-      navigate('/welcome/signin'); // Jika token tidak tersedia, arahkan pengguna kembali ke halaman login
+  useEffect(() => {
+    const tokenUserData = getUserToken();
+    if (!tokenUserData) {
+      navigate('/welcome/sign-in'); // Jika token tidak tersedia, arahkan pengguna kembali ke halaman login
     }
-    console.log(token)
+    console.log(tokenUserData)
+    setTokenUser(tokenUserData)
   }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { namaToko, alamatToko, email, password, pinToko } = formData;
+    const { namaToko, alamatToko, pinToko } = formData;
 
-    if (!namaToko || !alamatToko || !email || !password || !pinToko) {
+    if (!namaToko || !alamatToko || !pinToko) {
       Swal.fire({
         icon: 'error',
         title: '<span style="font-size: 16px; color: red;">Form tidak boleh kosong</span>',
-        showConfirmButton: false,
-        width: '300px',
-        timer: '3000',
-      });
-      return;
-    }
-
-    if (password.length < 8) {
-      Swal.fire({
-        icon: 'warning',
-        title: '<span style="font-size: 16px; color: #EA906C;">Password harus berisi minimal 8 karakter</span>',
         showConfirmButton: false,
         width: '300px',
         timer: '3000',
@@ -65,13 +55,13 @@ const ShopRegister = () => {
     //console.log('Data valid. Melanjutkan proses registrasi...');
 
     try {
-      const result = await shopRegister({
+      const body = {
+        email: tokenUser.user.email,
         nama_toko: namaToko,
         alamat_toko: alamatToko,
-        email: email,
-        password: password,
         pin: pinToko
-      });
+      };
+      const result = await shopRegister(body,tokenUser.token);
 
       // Cek hasil dari permintaan ke server
       if (result) {
@@ -83,7 +73,7 @@ const ShopRegister = () => {
           timer: '3000',
         });
         
-        navigate('/dashboard');
+        navigate('/homepage/dashboard');
 
       } else {
         Swal.fire({
@@ -137,14 +127,6 @@ const ShopRegister = () => {
           <div className="mb-3">
             <label htmlFor="alamatToko" className="form-label" style={clNavy}>Alamat Toko</label>
             <input type="text" className="form-control" style={bdNavy} id="alamatToko" name="alamatToko" value={formData.alamatToko} onChange={handleChange} />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label" style={clNavy}>Email</label>
-            <input type="email" className="form-control" style={bdNavy} id="email" name="email" value={formData.email} onChange={handleChange} />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label"style={clNavy}>Password</label>
-            <input type="password" className="form-control" style={bdNavy} id="password" name="password" value={formData.password} onChange={handleChange} />
           </div>
           <div className="mb-3">
             <label htmlFor="pinToko" className="form-label" style={clNavy}>Pin Toko</label>
