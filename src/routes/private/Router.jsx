@@ -1,47 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
-import AddProduct from '../../pages/AddProduct/AddProduct';
-import ProductList from '../../pages/ProductList/ProductList';
-import BuyerLayout from '../../layouts/BuyerLayout';
-import CatalogProduct from '../../pages/CatalogProduct/CatalogProduct';
-import Checkout from '../../pages/Checkout/Checkout';
-import SearchPage from '../../pages/SearchPage/SearchPage';
-import Homepage from '../../pages/Homepage/Homepage';
-import ShopRegister from '../../pages/ShopRegister/ShopRegister';
-
+import ProductList from '../../pages/ProductList/ProductList'
+import SellerLayout from '../../layouts/SellerLayout';
 
 const ROUTE_LIST = [
-    { 
-        path: '/homepage',
-        element: <BuyerLayout><Homepage/></BuyerLayout>,
-    },
-    {
-        path: '/homepage/daftar-toko',
-        element: <ShopRegister />,
-    },  
-    {
-        path: '/homepage/search',
-        element: <SearchPage/>,
-    },
-    {
-        path: '/homepage/daftar-toko',
-        element: <ShopRegister />,
-    }, 
-    {
+     {
         path: '/homepage/dashboard/produk-saya',
-        element: <ProductList/>,
-    },
-    {
-        path: '/homepage/dashboard/produk-saya/tambah-produk',
-        element: <AddProduct/>,
-    },   
-    {
-        path: '/homepage/search/produk/:_id',
-        element: <BuyerLayout><CatalogProduct/></BuyerLayout>,
-    }, 
-    {
-        path: '/homepage/search/produk/checkout/:_id',
-        element: <Checkout/>,
-    }  
+        element: <SellerLayout><ProductList/></SellerLayout>,
+    }
 ];
 
 const RoutePrivate = () => {
