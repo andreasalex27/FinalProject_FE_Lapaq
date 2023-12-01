@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
 import { productList } from '../../services/product';
 
 const Homepage = () => {
@@ -60,7 +59,7 @@ const Homepage = () => {
 
         <div className="container-fluid pt-4">
           <div className="d-flex justify-content-center align-items-center text-center gap-3 mx-auto">
-            <Link to="/daftar-toko" className='text-decoration-none'>
+            <Link to="/homepage/daftar-toko" className='text-decoration-none'>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div className="bg-white rounded d-flex justify-content-center align-items-center" style={{ height: "40px", width: "40px" }}>
                   <Icon icon="material-symbols:team-dashboard" color="#2b2a4c" width="25" />
@@ -70,17 +69,17 @@ const Homepage = () => {
             </Link>
 
 
-            <Link to="/dashboard/transaki" className='text-decoration-none'>
+            <Link to="/homepage/transaksi" className='text-decoration-none'>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div className="bg-white rounded d-flex justify-content-center align-items-center" style={{ height: "40px", width: "40px" }}>
-                  <Icon icon="icon-park-solid:transaction-order" color="#2b2a4c" width="25" /
+                  <Icon icon="icon-park-solid:transaction-order" color="#2b2a4c" width="25" />
                 </div>
                 <p className="mt-2 fw-bold" style={{fontSize: "12px", color:"#2b2a4c"}}>Transaksi</p>
               </div>
             </Link>
 
 
-            <Link to="/dashboard/keranjang" className='text-decoration-none'>
+            <Link to="/homepage/keranjang" className='text-decoration-none'>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div className="bg-white rounded d-flex justify-content-center align-items-center" style={{ height: "40px", width: "40px" }}>
                   <Icon icon="mdi:cart" color="#2b2a4c" width="25" />
@@ -90,7 +89,7 @@ const Homepage = () => {
             </Link>
 
 
-            <Link to="/dashboard/pesanan" className='text-decoration-none'>
+            <Link to="/homepage/pesanan" className='text-decoration-none'>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div className="bg-white rounded d-flex justify-content-center align-items-center" style={{ height: "40px", width: "40px" }}>
                   <Icon icon="material-symbols:orders" color="#2b2a4c" width="25" />
@@ -110,7 +109,7 @@ const Homepage = () => {
           <div className="text-white text-end motivasi justify-content-center align-items-center ms-auto py-3 pe-3">
             <p className='lh-sm'>&quot;Yuk, mari kita jalin kerjasama untuk memperkenalkan produk ini kepada lebih banyak orang dan mencapai kesuksesan bersama!&quot;</p>
             <button className="btn btn-danger btn-sm">
-              <Link to="/daftar-toko" className='text-white text-decoration-none fw-bold'>Daftar Sekarang</Link>
+              <Link to="/homepage/daftar-toko" className='text-white text-decoration-none fw-bold'>Daftar Sekarang</Link>
             </button>
           </div>
         </div>
@@ -124,7 +123,7 @@ const Homepage = () => {
             <div className='row row-cols-1 row-cols-md-2 g-2 px-2'>
               {groupedProducts[kategori].map(product => (
                 <div className='col m-0 p-0' key={product._id}>
-                  <Link to={`/homepage/produk/${product._id}`} className="text-decoration-none">
+                  <Link to={`/homepage/search/produk/detail/${product._id}`} className="text-decoration-none">
                     <div className='card my-2 m-2' key={product._id} style={{height: '280px'}}>
                       <img src={product.image || defaultImageUrl} alt={product.nama_produk} className="card-img-top" style={{objectFit: 'cover'}} width="120px"/>
                       <div className="card-body">
@@ -133,7 +132,7 @@ const Homepage = () => {
                         <div className="rating ms-1" style={{ position: 'absolute', bottom: '10px', left: '10px', right: '10px' }}>
                           <div className="d-flex align-items-center">
                             <Icon icon="tabler:star-filled" color="#ea906c" width="20" height="20"/>
-                            <span className='fs-6 ms-1 fw-bold' style={{ color:"#ea906c" }}>5,0</span>
+                            <span className='fs-6 ms-1 fw-bold' style={{ color:"#ea906c" }}>{product.rating || <span>0,0</span>}</span>
                           </div>
                         </div>
                       </div>
