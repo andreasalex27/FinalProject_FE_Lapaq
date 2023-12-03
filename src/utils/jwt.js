@@ -18,6 +18,24 @@ const getUserToken = () => {
     }
 }
 
+const getUserTokenSeller = () => {
+    const token = Cookies.get('tokenSeller');
+    if (!token) {
+        return null;
+    }
+
+    const decoded = jwtDecode(token);
+    if (!decoded) {
+        return null;
+    }
+
+    return {
+        token: token,
+        user_id: decoded.user_id
+    }
+}
+
 export {
-    getUserToken
+    getUserToken,
+    getUserTokenSeller
 }

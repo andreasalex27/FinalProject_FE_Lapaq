@@ -7,7 +7,7 @@ const EditProduct = () => {
     const { _id } = useParams();
 
     const [formData, setFormData] = useState({
-        product: '',
+        nama_produk: '',
         kategori: '',
         harga: '',
         deskripsi: '',
@@ -23,7 +23,7 @@ const EditProduct = () => {
                     console.log('Product Data:', productData); // Tambahkan ini untuk memastikan data sudah terambil dengan benar
     
                     setFormData({
-                        product: productData.payload.nama_produk || '',
+                        nama_produk: productData.payload.nama_produk || '',
                         kategori: productData.payload.kategori || '',
                         harga: productData.payload.harga || '',
                         deskripsi: productData.payload.deskripsi || '',
@@ -54,7 +54,7 @@ const EditProduct = () => {
 
         try {
             const response = await editProductId(_id, formData);
-            if (response && response.message === 'data berhasil diubah') {
+            if (response) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -90,8 +90,8 @@ const EditProduct = () => {
             <div className='pt-4 px-4'>
                 <form onSubmit={handleSubmit}>
                     <div className='mb-3'>
-                        <label htmlFor="product" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Nama Produk</label>
-                        <input type="text" className="form-control" name="product" placeholder="Masukkan Nama Produk" value={formData.product} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
+                        <label htmlFor="nama_produk" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Nama Produk</label>
+                        <input type="text" className="form-control" name="nama_produk" placeholder="Masukkan Nama Produk" value={formData.nama_produk} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
                     </div>
 
                     <div className='mb-3'>

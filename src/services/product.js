@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const productList = async () => {
   try {
-      const response = await axios.get('http://localhost:3000/api/produk');
+      const response = await axios.get(`${API_URL}/api/produk`);
       console.log(response.data);
       return response.data;     
     } catch (error) {
@@ -13,7 +15,7 @@ const productList = async () => {
 
 const productId = async (_id) => {
     try {
-        const response = await axios.get(`http://localhost:3000/api/produk/${_id}`);
+        const response = await axios.get(`${API_URL}/api/produk/${_id}`);
         console.log(response.data);
         return response.data;     
     } catch (error) {
@@ -24,7 +26,7 @@ const productId = async (_id) => {
 
 const addProduct = async (formData) => {
   try {
-    const response = await axios.post('http://localhost:3000/api/produk', formData, {
+    const response = await axios.post(`${API_URL}/api/produk`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data', // Atur tipe konten sebagai form data
       },
@@ -37,9 +39,9 @@ const addProduct = async (formData) => {
   }
 }
 
-const editProductId = async (_id) => {
+const editProductId = async (_id, formData) => {
   try {
-      const response = await axios.patch(`http://localhost:3000/api/produk/${_id}`);
+      const response = await axios.put(`${API_URL}/api/produk/${_id}`, formData);
       console.log(response.data);
       return response.data;     
   } catch (error) {
@@ -50,7 +52,7 @@ const editProductId = async (_id) => {
 
 const deleteProductId = async (_id) => {
   try {
-      const response = await axios.delete(`http://localhost:3000/api/produk/${_id}`);
+      const response = await axios.delete(`${API_URL}/api/produk/${_id}`);
       console.log(response.data);
       return response.data;     
   } catch (error) {

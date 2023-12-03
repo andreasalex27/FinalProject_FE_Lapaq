@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const buyerId = async (_id) => {
     try {
-        const response = await axios.get(`http://localhost:3000/api/users/${_id}`);
+        const response = await axios.get(`${API_URL}/api/users/${_id}`);
         console.log(response.data);
         return response.data;     
       } catch (error) {
@@ -13,7 +15,7 @@ const buyerId = async (_id) => {
 
 const editBuyerId = async (_id) => {
   try {
-      const response = await axios.patch(`http://localhost:3000/api/users/${_id}`);
+      const response = await axios.patch(`${API_URL}/api/users/${_id}`);
       console.log(response.data);
       return response.data;     
   } catch (error) {
@@ -24,7 +26,7 @@ const editBuyerId = async (_id) => {
 
 const sellerId = async (_id) => {
     try {
-        const response = await axios.get(`http://localhost:3000/users/seller/${_id}`);
+        const response = await axios.get(`${API_URL}/users/seller/${_id}`);
         console.log(response.data);
         return response.data;     
       } catch (error) {

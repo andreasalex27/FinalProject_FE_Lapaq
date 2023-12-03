@@ -36,7 +36,7 @@ import OrderReviewDetail from '../../pages/OrderReviewDetail/OrderReviewDetail';
 
 const ROUTE_LIST = [
     {
-        path: '/welcome',
+        path: '/',
         element: <LandingPage/>,
     },
     {

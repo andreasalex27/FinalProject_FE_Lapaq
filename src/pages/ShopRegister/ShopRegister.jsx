@@ -61,10 +61,14 @@ const ShopRegister = () => {
         alamat_toko: alamatToko,
         pin: pinToko
       };
+
       const result = await shopRegister(body,tokenUser.token);
 
       // Cek hasil dari permintaan ke server
       if (result) {
+        const tokenSeller = result.payload.token;
+        Cookies.set('tokenSeller', tokenSeller, { expires: 10 });
+
         Swal.fire({
           icon: 'success',
           title: '<span style="font-size: 16px; color: green;">Berhasil daftar toko</span>',

@@ -1,8 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { addProduct } from '../../services/product';
+import { getUserTokenSeller } from '../../utils/jwt';
+
 
 const AddProduct = () => {
+  const [tokenUserSeller, setTokenUserSeller] = useState(null)
 
   const [formData, setFormData] = useState({
     img: null,
@@ -14,6 +17,13 @@ const AddProduct = () => {
 
   // Buat useRef untuk input file
   const imageInputRef = useRef(null);
+
+  useEffect(() => {
+    const tokenUserData = getUserTokenSeller();
+
+    console.log(tokenUserData)
+    setTokenUserSeller(tokenUserData)
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -64,6 +74,7 @@ const AddProduct = () => {
 
     try {
       const data = new FormData();
+      data.append('seller_id', tokenUserSeller.user_id);
       data.append('nama_produk', formData.product);
       data.append('harga', formData.harga);
       data.append('deskripsi', formData.deskripsi);

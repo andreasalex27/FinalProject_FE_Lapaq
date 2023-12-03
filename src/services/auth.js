@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const login = async (body) => {
     try {
-        const response = await axios.post('http://localhost:3000/login',body);
+        const response = await axios.post(`${API_URL}/login`,body);
         console.log(response.data);
         return response.data;     
       } catch (error) {
@@ -13,7 +15,7 @@ const login = async (body) => {
 
 const register = async (body) => {
   try {
-    const response = await axios.post('http://localhost:3000/register',body);
+    const response = await axios.post(`${API_URL}/register`,body);
     console.log(response.data);
     return response.data;
     // Lakukan sesuatu setelah data berhasil disimpan
@@ -25,7 +27,7 @@ const register = async (body) => {
 
 const shopRegister = async (body, token) => {
   try {
-    const response = await axios.post('http://localhost:3000/register/seller', body, {
+    const response = await axios.post(`${API_URL}/register/seller`, body, {
       headers: {
         Authorization: `Bearer ${token}`,
       }
