@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 import Cookies from 'js-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../services/auth';
-import '../SignIn/SignIn.css'
+import './SignIn.css'
 
 const SignIn = () => {
   const navigate = useNavigate();
