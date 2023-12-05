@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { editProductId, productId } from '../../services/product';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const EditProduct = () => {
+    const navigate = useNavigate();
     const { _id } = useParams();
 
     const [formData, setFormData] = useState({
@@ -63,7 +64,7 @@ const EditProduct = () => {
                     width: '300px',
                     timer: 2000,
                 });
-                // Handle redirection or other actions upon successful edit
+                navigate('/homepage/dashboard/produk-saya')
             } else {
                 throw new Error('Gagal mengubah produk');
             }
@@ -118,7 +119,7 @@ const EditProduct = () => {
                     </div>
                     
                     <div className="d-grid gap-2 mt-4 mb-3">
-                        <button className="btn fw-bold text-white" type="submit" style={{backgroundColor: '#B31312'}}>Add Product</button>
+                        <button className="btn fw-bold text-white" type="submit" style={{backgroundColor: '#B31312'}}>Edit Produk</button>
                     </div>
                     
                 </form>

@@ -1,8 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { sellerId } from '../../services/user';
+import { getUserTokenSeller } from '../../utils/jwt';
 
 const Dashboard = () => {
+    const navigate = useNavigate();
+    const [tokenUserSeller, setTokenUserSeller] = useState(null);
+    const [sellerData, setSellerData] = useState({
+        namaToko: '',
+    });
+
+    useEffect(() => {
+        const tokenUserData = getUserTokenSeller();
+        console.log('Token User Data:', tokenUserData);
+        if (!tokenUserData) {
+            navigate('/homepage/daftar-toko');
+        } else {
+            setTokenUserSeller(tokenUserData);
+        }
+    
+        const fetchData = async () => {
+            try {
+              const response = await sellerId(tokenUserData.user_id);
+              if (response) {
+                setSellerData({ namaToko: response.payload.nama_toko });
+              }
+            } catch (error) {
+              console.error('Error:', error);
+            }
+          };
+        
+          fetchData();
+        }, []);
 
     return (
         <>
@@ -19,7 +49,7 @@ const Dashboard = () => {
                 <div className="details d-flex flex-column justify-content-between flex-grow-1 ms-2">
                     <div className="title d-flex justify-content-between align-items-center">
                         <div>
-                            <h4 className="fs-6 fw-bold" style={{ color: '#B31312' }}>Sabrina Fashion</h4>
+                            <h4 className="fs-6 fw-bold" style={{ color: '#B31312' }}>{sellerData.namaToko}</h4>
                             <p style={{ color: '#EA906C', marginBottom: '0' }}>Rp 2.000.000</p>
                         </div>
                         <div className="button-container">

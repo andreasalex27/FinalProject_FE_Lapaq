@@ -16,6 +16,7 @@ import OrderHistory from '../../pages/OrderHistory/OrderHistory';
 import TransactionOrder from '../../pages/TransactionOrder/TransactionOrder';
 import TransactionReturn from '../../pages/TransactionReturn/TransactionReturn';
 import TransactionReview from '../../pages/TransactionReview/TransactionReview';
+import ShopLogin from '../../pages/ShopLogin/ShopLogin';
 import ShopRegister from '../../pages/ShopRegister/ShopRegister';
 import Dashboard from '../../pages/Dashboard/Dashboard';
 import ProductList from '../../pages/ProductList/ProductList';
@@ -89,6 +90,10 @@ const ROUTE_LIST = [
     {
         path: '/homepage/transaksi/review',
         element: <TransactionReview/>,
+    },
+    {
+        path: '/homepage/masuk-toko',
+        element: <ShopLogin/>,
     },
     {
         path: '/homepage/daftar-toko',

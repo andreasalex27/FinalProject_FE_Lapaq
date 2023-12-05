@@ -31,7 +31,7 @@ const getUserTokenSeller = () => {
 
     return {
         token: token,
-        user_id: decoded.user_id
+        user_id: decoded.user_id,
     }
 }
 

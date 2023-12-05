@@ -7,14 +7,14 @@ import './SignIn.css'
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
   
-    if (!username.trim() && !password.trim()) {
+    if (!email.trim() && !password.trim()) {
       Swal.fire({
         icon: 'error',
         title: '<span style="font-size: 16px; color: red;">Form tidak boleh kosong</span>',
@@ -22,10 +22,10 @@ const SignIn = () => {
         width: '300px',
         timer: '3000',
       });
-    } else if (!username.trim()) {
+    } else if (!email.trim()) {
       Swal.fire({
         icon: "question",
-        title: '<span style="font-size: 16px; color:#3876BF;">Isi username</span>',
+        title: '<span style="font-size: 16px; color:#3876BF;">Isi email</span>',
         showConfirmButton: false,
         width: '300px',
         timer: 3000,
@@ -50,7 +50,7 @@ const SignIn = () => {
 
       try {
         const result = await login({
-          email: username,
+          email: email,
           password: password,
         });
     
@@ -69,7 +69,7 @@ const SignIn = () => {
         } else {
           Swal.fire({
             icon: 'error',
-            title: '<span style="font-size: 16px; color: red;">Username atau password salah</span>',
+            title: '<span style="font-size: 16px; color: red;">email atau password salah</span>',
             showConfirmButton: false,
             width: '300px',
             timer: '3000',
@@ -108,14 +108,14 @@ const SignIn = () => {
               <input
                 type="email"
                 id="username"
-                name="username"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                name="email"
+                placeholder="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className='error'>
-              {error.username && <p>{error.username}</p>}
+              {error.email && <p>{error.email}</p>}
             </div>
 
             <div className="password">

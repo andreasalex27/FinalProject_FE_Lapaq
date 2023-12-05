@@ -33,6 +33,20 @@ const Homepage = () => {
   }, {});
 
   const defaultImageUrl = 'https://i.imgur.com/2a0RWOy.jpg';
+  const defaultProducts = [
+    {
+      _id: '1',
+      nama_produk: 'Produk Default',
+      harga: 0,
+      rating: 0.0,
+    },
+    {
+      _id: '2',
+      nama_produk: 'Produk Default',
+      harga: 0,
+      rating: 0.0,
+    },
+  ];
 
   return (
     <>

@@ -61,10 +61,11 @@ const deleteProductId = async (_id) => {
   }
 }
 
+
 export {
   productList,
   productId,
   addProduct,
   editProductId, 
-  deleteProductId
+  deleteProductId,
 }

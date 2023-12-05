@@ -40,9 +40,25 @@ const shopRegister = async (body, token) => {
   }
 }
 
+const shopLogin = async (body, token) => {
+  try {
+    const response = await axios.post(`${API_URL}/login/seller`, body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Gagal menyimpan data ke server:', error);
+    return null;
+  }
+}
+
 
 export {
   login,
   register,
-  shopRegister
+  shopRegister,
+  shopLogin
 }

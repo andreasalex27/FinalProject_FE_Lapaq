@@ -34,6 +34,20 @@ const LandingPage = () => {
   }, {});
 
   const defaultImageUrl = 'https://i.imgur.com/2a0RWOy.jpg';
+  const defaultProducts = [
+    {
+      _id: '1',
+      nama_produk: 'Produk Default',
+      harga: 0,
+      rating: 0.0,
+    },
+    {
+      _id: '2',
+      nama_produk: 'Produk Default',
+      harga: 0,
+      rating: 0.0,
+    },
+  ];
 
   const openSigninPage = () => {
     navigate("/welcome/sign-in");
@@ -120,15 +134,33 @@ const LandingPage = () => {
               </div>
             </div>
           </div>
-          
-          
+            
           <div className='container mt-3 mb-4'>
             {Object.keys(groupedProducts).map(kategori => (
               <div className='row justify-content-center' key={kategori}>
                 <h2 className="ms-2 mt-4 mb-0 fs-5 fw-semibold" style={{color: '#2B2A4C'}}>{kategori}</h2>
 
                 <div className='row row-cols-1 row-cols-md-2 g-2 px-2'>
-                  {groupedProducts[kategori].map(product => (
+                  {groupedProducts[kategori].length === 0 ? (
+                    defaultProducts.map(product => (
+                      <div className='col m-0 p-0' key={product._id}>
+                        <div className='card my-2 m-2' style={{height: '280px'}}>
+                          <img src={defaultImageUrl} alt={product.nama_produk} className="card-img-top" style={{objectFit: 'cover'}} width="120px"/>
+                          <div className="card-body">
+                            <h5 style={{ fontSize: "14px" }} className="card-title fw-semibold">{product.nama_produk}</h5>
+                            <p className="card-text fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}><span>Rp </span>{product.harga}</p>
+                            <div className="rating ms-1" style={{ position: 'absolute', bottom: '10px', left: '10px', right: '10px' }}>
+                              <div className="d-flex align-items-center">
+                                <Icon icon="tabler:star-filled" color="#ea906c" width="20" height="20"/>
+                                <span className='fs-6 ms-1 fw-bold' style={{ color:"#ea906c" }}>{product.rating || <span>0,0</span>}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                  groupedProducts[kategori].map(product => (
                     <div className='col m-0 p-0' key={product._id}>
                       <div className='card my-2 m-2' style={{height: '280px'}}>
                         <img src={product.image || defaultImageUrl} alt={product.nama_produk} className="card-img-top" style={{objectFit: 'cover'}} width="120px"/>
@@ -144,14 +176,13 @@ const LandingPage = () => {
                         </div>
                       </div>
                     </div>
-                  ))}
+                  )))}
                 </div>
               </div>
             ))}
-          </div>
         </div>
+      </div>
     </div>
-
   );
 };
 

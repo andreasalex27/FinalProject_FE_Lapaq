@@ -55,7 +55,8 @@ body {
 .form-daftar form .no-nik,
 .form-daftar form .password,
 .form-daftar form .con-password,
-.form-daftar form .email {
+.form-daftar form .email,
+.form-daftar form .alamat {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,7 +100,8 @@ body {
 .form-daftar form #no-nik,
 .form-daftar form #password,
 .form-daftar form #con-password,
-.form-daftar form #email {
+.form-daftar form #email,
+.form-daftar form #alamat {
   width: 100%;
   padding: 4% 0;
   border-radius: 0 13px 13px 0;
