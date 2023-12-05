@@ -24,7 +24,7 @@ const SellerLayout = ({ children }) => {
                         <Link to="/homepage/dashboard/produk-saya">
                             <Icon icon="material-symbols:package-rounded" color="#b31312" width="30" />
                         </Link>
-                        <Link to="/homepage/dashboard/profile/:_id">
+                        <Link to="/homepage/dashboard/profile">
                             <Icon icon="iconamoon:profile-fill" color="#b31312" width="30" />            
                         </Link>
                     </div>

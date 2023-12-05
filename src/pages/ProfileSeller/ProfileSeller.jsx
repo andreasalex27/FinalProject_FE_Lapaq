@@ -1,39 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
-import { sellerId } from "../../services/user";
+import { useNavigate } from 'react-router-dom';
+import { sellerId, editSellerId } from "../../services/user";
+import { getUserTokenSeller } from "../../utils/jwt";
 
 const ProfileSeller = () => {
     const navigate = useNavigate();
-    const { _id } = useParams();
+    const [tokenUserSeller, setTokenUserSeller] = useState(null);
     const [sellerData, setSellerData] = useState(null);
-    const [showPassword, setShowPassword] = useState(false);
-    const [showPin, setShowPin] = useState(false);
 
     useEffect(() => {
-        const fetchSellerData = async () => {
+        const tokenUserData = getUserTokenSeller();
+        console.log('Token User Data:', tokenUserData);
+        if (!tokenUserData) {
+            navigate('/homepage/daftar-toko');
+        } else {
+            setTokenUserSeller(tokenUserData);
+        }
+    
+        const fetchData = async () => {
             try {
-                const data = await sellerId(_id);
-                setSellerData(data.payload); // Menyimpan data payload dari response
+              const response = await sellerId(tokenUserData.user_id);
+              if (response) {
+                setSellerData(response.payload);
+              }
             } catch (error) {
-                console.error('Error fetching seller data:', error);
+              console.error('Error:', error);
             }
-        };
-
-        fetchSellerData();
-    }, [_id]);
-
-    // Fungsi untuk menampilkan/hide password
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    // Fungsi untuk menampilkan/hide PIN
-    const togglePinVisibility = () => {
-        setShowPin(!showPin);
-    };
+          };
+        
+          fetchData();
+        }, []);
 
     const openEditProfileSeller = () => {
-        navigate(`/homepage/dashboard/profile/edit/${sellerData._id}`);
+        navigate('/homepage/dashboard/profile/edit');
       };
 
     return (
@@ -56,30 +55,6 @@ const ProfileSeller = () => {
                     </div>
                     <div className="align-items-center rounded px-2" style={{ border: '2px solid #2B2A4C', height: '40px' }}>
                         <p style={{lineHeight: '40px', fontSize: '14px'}}>{sellerData?.email || '-'}</p>
-                    </div>
-                </div>
-
-                <div className="mb-3">
-                    <div className="mb-0">
-                        <p className="fw-bold mb-2" style={{ color: '#2B2A4C', fontSize: '14px' }}>Password</p>
-                    </div>
-                    <div className="d-flex align-items-center rounded px-2" style={{ border: '2px solid #2B2A4C', height: '40px' }}>
-                        <input type={showPassword ? 'text' : 'password'} value={sellerData?.password || '-'} readOnly style={{ border: 'none', outline: 'none', fontSize: '14px', width: '85%'}}/>
-                        <button type="button" onClick={togglePasswordVisibility} style={{ border: 'none', background: 'transparent', cursor: 'pointer', outline: 'none' }}>
-                            {showPassword ? 'Hide' : 'Show'}
-                        </button>
-                    </div>
-                </div>
-
-                <div className="mb-3">
-                    <div className="mb-0">
-                        <p className="fw-bold mb-2" style={{ color: '#2B2A4C', fontSize: '14px' }}>PIN Toko</p>
-                    </div>
-                    <div className="d-flex align-items-center rounded px-2" style={{ border: '2px solid #2B2A4C', height: '40px' }}>
-                        <input type={showPin ? 'text' : 'password'} value={sellerData?.pin || '-'} readOnly style={{ border: 'none', outline: 'none', fontSize: '14px', width: '85%'}}/>
-                        <button type="button" onClick={togglePinVisibility} style={{ border: 'none', background: 'transparent', cursor: 'pointer', outline: 'none' }}>
-                            {showPin ? 'Hide' : 'Show'}
-                        </button>
                     </div>
                 </div>
 

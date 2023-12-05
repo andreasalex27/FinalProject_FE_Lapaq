@@ -35,8 +35,26 @@ const sellerId = async (_id) => {
       }
 }
 
+const editSellerId = async (_id, body, token) => {
+  try {
+      const response = await axios.patch(`${API_URL}/users/seller/${_id}`, body, {
+        headers: {
+          'Content-Type': 'application/json', // Atur tipe konten sebagai form data
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      console.log(response.data);
+      return response.data;     
+  } catch (error) {
+      console.error('Gagal update data ke server:', error);
+      return null;
+  }
+}
+
 export {
   buyerId,
   editBuyerId,
-  sellerId
+  sellerId,
+  editSellerId
 }

@@ -120,11 +120,11 @@ const ROUTE_LIST = [
         element: <EditProduct/>,
     },
     {
-        path: '/homepage/dashboard/profile/:_id',
+        path: '/homepage/dashboard/profile',
         element: <SellerLayout><ProfileSeller/></SellerLayout>,
     },
     {
-        path: '/homepage/dashboard/profile/edit/:_id',
+        path: '/homepage/dashboard/profile/edit',
         element: <EditProfileSeller/>,
     },
     {

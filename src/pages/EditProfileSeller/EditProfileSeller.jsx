@@ -1,16 +1,46 @@
-import React, { useState } from 'react';
-import Swal from 'sweetalert2'; // Import library untuk menampilkan pop-up
+import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { sellerId, editSellerId } from "../../services/user";
+import { getUserTokenSeller } from "../../utils/jwt";
 
 const EditProfileSeller = () => {
-  // State untuk menyimpan data profil
+  const navigate = useNavigate();
+  const [tokenUserSeller, setTokenUserSeller] = useState(null);
   const [profileData, setProfileData] = useState({
-    namaToko: 'Sabrina Hijab Fashion',
-    alamatToko: 'Griya Permata Blok B No. 123',
-    alamatEmail: 'sabrinafashion@gmail.com',
-    nomorTelepon: '086599998766',
-    password: 'sabrinafash99',
-    pinToko: '879065',
+    nama_toko: "",
+    alamat_toko: "",
   });
+
+  useEffect(() => {
+    const tokenUserData = getUserTokenSeller();
+    console.log("Token User Data:", tokenUserData);
+    if (!tokenUserData) {
+      navigate("/homepage/daftar-toko");
+    } else {
+      setTokenUserSeller(tokenUserData);
+    }
+
+    const fetchSeller = async () => {
+      try {
+        const userSellerId = tokenUserData.user_id;
+        const response = await sellerId(userSellerId);
+
+        // Pastikan productData memiliki nilai yang valid sebelum mengatur state
+        if (response) {
+          console.log(response.payload);
+          setProfileData({
+            nama_toko: response.payload.nama_toko,
+            alamat_toko: response.payload.alamat_toko
+          });
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data produk:", error);
+      }
+    };
+
+    fetchSeller();
+  }, []);
 
   // Handler untuk mengubah nilai pada form
   const handleChange = (e) => {
@@ -19,117 +49,146 @@ const EditProfileSeller = () => {
   };
 
   // Handler ketika tombol simpan ditekan
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Validasi form
-    const { namaToko, alamatToko, alamatEmail, nomorTelepon, password, pinToko } = profileData;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Validasi form
+    const { nama_toko, alamat_toko } = profileData;
 
-    if (
-        !namaToko.trim() ||
-        !alamatToko.trim() ||
-        !alamatEmail.trim() ||
-        !nomorTelepon.trim() ||
-        !password.trim() ||
-        !pinToko.trim()
-    ) {
-        Swal.fire({
-        icon: 'error',
-        title: '<span style="font-size: 16px; color: red;">Form tidak boleh kosong</span>',
+    if (!nama_toko.trim() || !alamat_toko.trim()) {
+      Swal.fire({
+        icon: "error",
+        title:
+          '<span style="font-size: 16px; color: red;">Form tidak boleh kosong</span>',
         showConfirmButton: false,
-        width: '300px',
-        timer: '3000',
+        width: "300px",
+        timer: "3000",
         customClass: {
-            title: 'custom-title-class', // Nama class untuk style khusus (opsional)
+          title: "custom-title-class", // Nama class untuk style khusus (opsional)
         },
-        });
-        return;
+      });
+      return;
     }
 
-    if (password.length < 8) {
+    const userSellerId = tokenUserSeller.user_id;
+    const response = await editSellerId(userSellerId, profileData, tokenUserSeller.token);
+    if (response) {
+      Swal.fire({
+        icon: "success",
+        title:
+          '<span style="font-size: 16px; color: green;">Profil berhasil diubah</span>',
+        showConfirmButton: false,
+        width: "300px",
+        timer: "3000",
+        customClass: {
+          title: "custom-title-class", // Nama class untuk style khusus (opsional)
+        },
+      });
+    } else {
         Swal.fire({
-        icon: 'warning',
-        title: '<span style="font-size: 16px; color: #EA906C;">Password harus berisi minimal 8 karakter</span>',
-        showConfirmButton: false,
-        width: '300px',
-        timer: '3000',
-        customClass: {
-            title: 'custom-title-class', // Nama class untuk style khusus (opsional)
-        },
-        });
-        return;
+            icon: "error",
+            title:
+              '<span style="font-size: 16px; color: red;">Gagal edit profile</span>',
+            showConfirmButton: false,
+            width: "300px",
+            timer: "3000",
+            customClass: {
+              title: "custom-title-class", // Nama class untuk style khusus (opsional)
+            },
+          });
     }
-
-    if (!/^\d{6}$/.test(pinToko)) {
-        Swal.fire({
-        icon: 'warning',
-        title: '<span style="font-size: 16px; color: #EA906C;">Pin Toko harus terdiri dari 6 digit angka</span>',
-        showConfirmButton: false,
-        width: '300px',
-        timer: '3000',
-        customClass: {
-            title: 'custom-title-class', // Nama class untuk style khusus (opsional)
-        },
-        });
-        return;
-    }
-
-    // Jika semua validasi terlewati, lakukan proses penyimpanan profil
-    // ... Kode untuk menyimpan profil ke backend atau tempat penyimpanan lainnya
-    
-
-    // Tampilkan pop-up notifikasi bahwa profil telah diubah
-    Swal.fire({
-        icon: 'success',
-        title: '<span style="font-size: 16px; color: green;">Profil berhasil diubah</span>',
-        showConfirmButton: false,
-        width: '300px',
-        timer: '3000',
-        customClass: {
-          title: 'custom-title-class', // Nama class untuk style khusus (opsional)
-        },
-    });
   };
 
   return (
-    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px', height: '100vh'}}>
-        <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto', height: '100%' }}>
-
-            <div className='pt-4 pb-1' style={{boxShadow: '0 3px 3px rgba(0, 0, 0, 0.5)', marginBottom: '3px'}}>
-                <p className='text-center fs-6 fw-bold' style={{color: '#B31312'}}>Edit Profil Toko</p>
-            </div>
-
-            <div className='p-4'>
-                <form onSubmit={handleSubmit}>
-                    <div className='mb-3'>
-                        <label htmlFor="storeName" className='fw-bold mb-1' style={{fontSize: '14px', color: '#2B2A4C'}}>Nama Toko</label><br/>
-                        <input className='align-items-center rounded px-2 form-control' style={{ border: '2px solid #2B2A4C', height: '40px', fontSize: '14px' }} type="text" id="storeName" name="namaToko" value={profileData.namaToko} onChange={handleChange} />
-                    </div>
-                    <div className='mb-3'>
-                        <label htmlFor="storeAddress" className='fw-bold mb-1' style={{fontSize: '14px', color: '#2B2A4C'}}>Alamat Toko</label><br/>
-                        <input className='align-items-center rounded px-2 form-control' style={{ border: '2px solid #2B2A4C', height: '40px', fontSize: '14px' }} type="text" id="storeAddress" name="alamatToko" value={profileData.alamatToko} onChange={handleChange}/>
-                    </div>
-                    <div className='mb-3'>
-                        <label htmlFor="email" className='fw-bold mb-1' style={{fontSize: '14px', color: '#2B2A4C'}}>Alamat Email</label><br/>
-                        <input className='align-items-center rounded px-2 form-control' style={{ border: '2px solid #2B2A4C', height: '40px', fontSize: '14px' }} type="email" id="email" name="alamatEmail" value={profileData.alamatEmail} onChange={handleChange}/>
-                    </div>
-                    <div className='mb-3'>
-                        <label htmlFor="phoneNumber" className='fw-bold mb-1' style={{fontSize: '14px', color: '#2B2A4C'}}>Nomor Telepon</label><br/>
-                        <input className='align-items-center rounded px-2 form-control' style={{ border: '2px solid #2B2A4C', height: '40px', fontSize: '14px' }} type="tel" id="phoneNumber" name="nomorTelepon" value={profileData.nomorTelepon} onChange={handleChange}/>
-                    </div>
-                    <div className='mb-3'>
-                        <label htmlFor="password" className='fw-bold mb-1' style={{fontSize: '14px', color: '#2B2A4C'}}>Password</label><br/>
-                        <input className='align-items-center rounded px-2 form-control' style={{ border: '2px solid #2B2A4C', height: '40px', fontSize: '14px' }} type="text" id="password" name="password" value={profileData.password} onChange={handleChange}/>
-                    </div>
-                    <div className='mb-3'>
-                        <label htmlFor="pin" className='fw-bold mb-1' style={{fontSize: '14px', color: '#2B2A4C'}}>Pin Toko</label><br />
-                        <input className='align-items-center rounded px-2 form-control' style={{ border: '2px solid #2B2A4C', height: '40px', fontSize: '14px' }} type="text" id="pin" name="pinToko" value={profileData.pinToko} onChange={handleChange}/>
-                    </div>
-                    <div class="d-grid gap-2" style={{marginTop: '50px'}}>
-                        <button class="btn fw-bold" type="submit" style={{backgroundColor: '#B31312', color: 'white'}}>Simpan</button>
-                    </div>
-                </form>
-            </div>
+    <div
+      className="body d-flex justify-content-center align-items-center"
+      style={{
+        backgroundColor: "#B31312",
+        fontFamily: "Montserrat, sans-serif",
+        fontSize: "12px",
+        height: "100vh",
+      }}
+    >
+      <div
+        className="container-md p-0 pb-5"
+        style={{
+          maxWidth: "390px",
+          backgroundColor: "white",
+          margin: "auto",
+          height: "100%",
+        }}
+      >
+        <div
+          className="pt-4 pb-1"
+          style={{
+            boxShadow: "0 3px 3px rgba(0, 0, 0, 0.5)",
+            marginBottom: "3px",
+          }}
+        >
+          <p className="text-center fs-6 fw-bold" style={{ color: "#B31312" }}>
+            Edit Profil Toko
+          </p>
         </div>
+
+        <div className="p-4">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label
+                htmlFor="storeName"
+                className="fw-bold mb-1"
+                style={{ fontSize: "14px", color: "#2B2A4C" }}
+              >
+                Nama Toko
+              </label>
+              <br />
+              <input
+                className="align-items-center rounded px-2 form-control"
+                style={{
+                  border: "2px solid #2B2A4C",
+                  height: "40px",
+                  fontSize: "14px",
+                }}
+                type="text"
+                id="storeName"
+                name="nama_toko"
+                value={profileData.nama_toko}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label
+                htmlFor="storeAddress"
+                className="fw-bold mb-1"
+                style={{ fontSize: "14px", color: "#2B2A4C" }}
+              >
+                Alamat Toko
+              </label>
+              <br />
+              <input
+                className="align-items-center rounded px-2 form-control"
+                style={{
+                  border: "2px solid #2B2A4C",
+                  height: "40px",
+                  fontSize: "14px",
+                }}
+                type="text"
+                id="storeAddress"
+                name="alamat_toko"
+                value={profileData.alamat_toko}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="d-grid gap-2" style={{ marginTop: "50px" }}>
+              <button
+                className="btn fw-bold"
+                type="submit"
+                style={{ backgroundColor: "#B31312", color: "white" }}
+              >
+                Simpan
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
