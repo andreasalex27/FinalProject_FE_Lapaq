@@ -34,6 +34,22 @@ const getOrder = async (user_buyer_id, token) => {
   }
 }
 
+const getOrderSeller = async (user_seller_id, token) => {
+  try {
+    const response = await axios.get(`${API_URL}/product/order/seller/${user_seller_id}`,{
+      headers: {
+        'Content-Type': 'application/json', // Atur tipe konten sebagai form data
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response.data);
+    return response.data;     
+  } catch (error) {
+    console.error('Gagal mengambil data ke server:', error);
+    return null;
+  }
+}
+
 const addComment = async (body, token) => {
   try {
     const response = await axios.post(`${API_URL}/comment`, body, {
@@ -53,5 +69,6 @@ const addComment = async (body, token) => {
 export {
   addOrder,
   getOrder,
+  getOrderSeller,
   addComment
 }

@@ -1,23 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import { productList } from '../../services/product';
+import { getOrderSeller } from '../../services/order';
+import { productId } from '../../services/product';
+import { getUserTokenSeller } from '../../utils/jwt';
 import { Link } from 'react-router-dom';
 
 const OrderProcess = () => {
   const [products, setProducts] = useState([]);
   const [activeFilter, setActiveFilter] = useState('kemas');
+  const [tokenUserSeller, setTokenUserSeller] = useState()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await productList();
+        const tokenUserData = getUserTokenSeller();
+        setTokenUserSeller(tokenUserData);
+
+        const token = tokenUserData.token;
+        const userSellerId = tokenUserData.user_id;
+
+        const response = await getOrderSeller(userSellerId, token);
         if (response && Array.isArray(response.payload)) {
-          const updatedProducts = response.payload.map(product => ({
-            ...product,
-            buttonTextKirim: 'Kirim',
-            buttonTextKemas: 'Kemas'
+          const updatedProducts = await Promise.all(response.payload.map(async (product) => {
+            const productDetails = await productId(product.product_id);
+            return {
+              ...productDetails,
+              buttonTextKirim: 'Kirim',
+              buttonTextKemas: 'Kemas'
+            };
           }));
           setProducts(updatedProducts);
+          console.log(products)
         } else {
           console.error('Data produk tidak ditemukan atau bukanlah array:', response);
         }
@@ -90,13 +104,13 @@ const OrderProcess = () => {
             <div className='card mb-1 py-3 px-2 border border-0' key={product._id} style={{ boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)'}}>
               <div className='row g-0 d-flex align-items-center'>
                 <div className='col-md-2 d-flex align-items-center'>
-                  <img src={product.image || defaultImageUrl} alt={product.nama_produk} className="rounded" style={{ height: "60px", width: "60px" }} />
+                  <img src={product.payload.image || defaultImageUrl} alt={product.nama_produk} className="rounded" style={{ height: "60px", width: "60px" }} />
                 </div>
                 <div className='col-md-10'>
                   <div className='card-body d-flex justify-content-between align-items-center p-0 ps-3'>
                     <div>
-                      <h5 style={{ fontSize: "14px" }} className="card-title fw-bold">{product.nama_produk}</h5>
-                      <p className="card-text" style={{ color: '#2B2A4C', fontSize: "14px" }}><span>Rp </span>{product.harga}</p>
+                      <h5 style={{ fontSize: "14px" }} className="card-title fw-bold">{product.payload.nama_produk}</h5>
+                      <p className="card-text" style={{ color: '#2B2A4C', fontSize: "14px" }}><span>Rp </span>{product.payload.harga}</p>
                     </div>
                     {activeFilter === 'kemas' && (
                       <div className='d-flex justify-content-between align-items-center'>
@@ -119,13 +133,13 @@ const OrderProcess = () => {
             <div className='card mb-1 py-3 px-2 border border-0' key={product._id} style={{ boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)' }}>
               <div className='row g-0 d-flex align-items-center'>
                 <div className='col-md-2 d-flex align-items-center'>
-                  <img src={product.image || defaultImageUrl} alt={product.nama_produk} className="rounded" style={{ height: "60px", width: "60px" }} />
+                  <img src={product.payload.image || defaultImageUrl} alt={product.payload.nama_produk} className="rounded" style={{ height: "60px", width: "60px" }} />
                 </div>
                 <div className='col-md-10'>
                   <div className='card-body d-flex justify-content-between align-items-center p-0 ps-3'>
                     <div>
-                      <h5 style={{ fontSize: "14px" }} className="card-title fw-bold">{product.nama_produk}</h5>
-                      <p className="card-text" style={{ color: '#2B2A4C', fontSize: "14px" }}><span>Rp </span>{product.harga}</p>
+                      <h5 style={{ fontSize: "14px" }} className="card-title fw-bold">{product.payload.nama_produk}</h5>
+                      <p className="card-text" style={{ color: '#2B2A4C', fontSize: "14px" }}><span>Rp </span>{product.payload.harga}</p>
                     </div>
                     {activeFilter === 'kirim' && (
                       <div className='d-flex justify-content-between align-items-center'>
@@ -149,13 +163,13 @@ const OrderProcess = () => {
               <Link to={`/homepage/dashboard/riwayat/pemrosesan/selesai/${product._id}`} className="text-decoration-none">
                 <div className='row g-0 d-flex align-items-center'>
                   <div className='col-md-2 d-flex align-items-center'>
-                    <img src={product.image || defaultImageUrl} alt={product.nama_produk} className="rounded" style={{ height: "60px", width: "60px" }} />
+                    <img src={product.payload.image || defaultImageUrl} alt={product.payload.nama_produk} className="rounded" style={{ height: "60px", width: "60px" }} />
                   </div>
                   <div className='col-md-10'>
                     <div className='card-body d-flex justify-content-between align-items-center p-0 ps-3'>
                       <div>
-                        <h5 style={{ fontSize: "14px", color: '#2B2A4C' }} className="card-title fw-bold">{product.nama_produk}</h5>
-                        <p className="card-text" style={{ color: '#2B2A4C', fontSize: "14px" }}><span>Rp </span>{product.harga}</p>
+                        <h5 style={{ fontSize: "14px", color: '#2B2A4C' }} className="card-title fw-bold">{product.payload.nama_produk}</h5>
+                        <p className="card-text" style={{ color: '#2B2A4C', fontSize: "14px" }}><span>Rp </span>{product.payload.harga}</p>
                       </div>
                     </div>
                   </div>
