@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
-import { listCart } from '../../services/order';
-import { getUserToken } from '../../utils/jwt';
+import { productList } from '../../services/product';
 
 const Carts = () => {
-  const [carts, setCarts] = useState([]);
-  const [tokenUser, setTokenUser] = useState(null)
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const tokenUserData = getUserToken();
-    console.log(tokenUserData)
-    setTokenUser(tokenUserData)
-
     const fetchData = async () => {
       try {
-        const response = await listCart(tokenUserData.user._id, tokenUserData.token);
+        const response = await productList();
         if (response && Array.isArray(response.payload)) {
-          setCarts(response.payload);
-          console.log(response.payload)
+          setProducts(response.payload);
         } else {
-          console.error('Data keranjang tidak ditemukan atau bukanlah array:', response);
+          console.error('Data produk tidak ditemukan atau bukanlah array:', response);
         }
       } catch (error) {
         console.error('Gagal mengambil data dari server:', error);
@@ -40,7 +33,7 @@ const Carts = () => {
 
         <div className='container mt-3 mb-4'>
       <div className='row g-2 px-2'>
-        {carts.map(product => (
+        {products.map(product => (
           <div className='card mb-1 py-3 px-2 border border-0' key={product._id} style={{boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)'}}>
             <div className='row g-0 d-flex align-items-center'>
               <div className='col-md-2 d-flex align-items-center'>
@@ -53,7 +46,7 @@ const Carts = () => {
                     <p className="card-text" style={{color: '#2B2A4C', fontSize: "14px"}}><span>Rp </span>{product.harga}</p>
                   </div>
                   <div className='d-flex justify-content-between align-items-center'>
-                    <Link to={`/homepage/search/produk/checkout/${product.produk_id}`} className="btn btn-sm fw-bold text-white" style={{backgroundColor: '#B31312'}}>Checkout</Link>
+                    <Link to={`/homepage/search/produk/checkout/${product._id}`} className="btn btn-sm fw-bold text-white" style={{backgroundColor: '#B31312'}}>Checkout</Link>
                   </div>
                 </div>
               </div>
@@ -63,7 +56,7 @@ const Carts = () => {
       </div>
     </div>
 
-        {/*<div className='container mt-3 mb-4'>
+        <div className='container mt-3 mb-4'>
             <p className='fs-4 ms-3 fw-bold'>Rekomendasi</p>
                 <div className='row row-cols-1 row-cols-md-2 g-2 px-2'>
                     {products.map(product => (
@@ -86,7 +79,7 @@ const Carts = () => {
                     </div>
                     ))}
                 </div>
-                    </div>*/}
+        </div>
     </>
   );
 };

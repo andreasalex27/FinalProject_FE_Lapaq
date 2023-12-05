@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import Swal from "sweetalert2";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { productId } from '../../services/product';
-import { addCart } from '../../services/order';
-import { getUserToken } from '../../utils/jwt';
 import { useParams } from 'react-router-dom';
 
 const CatalogProduct = () => {
-    const navigate = useNavigate();
-    const [tokenUser, setTokenUser] = useState(null)
-
     const [product, setProduct] = useState({
         image: 'https://i.imgur.com/2a0RWOy.jpg',
         nama_produk: '',
@@ -23,10 +17,6 @@ const CatalogProduct = () => {
     const { _id } = useParams();
 
     useEffect(() => {
-        const tokenUserData = getUserToken();
-        console.log(tokenUserData)
-        setTokenUser(tokenUserData)
-
         const fetchData = async () => {
             try {
                 const response = await productId(_id);
@@ -40,32 +30,6 @@ const CatalogProduct = () => {
     
         fetchData();
     }, [_id]);
-
-    const handleAddCart = async() => {
-        const body = {
-            user_buyer_id: tokenUser.user._id,
-            produk_id: _id
-          }
-          const result = await addCart(body, tokenUser.token)
-          if (result){
-            Swal.fire({
-                icon: 'success',
-                title: '<span style="font-size: 16px; color: green;">Berhasil menambahkan ke keranjang</span>',
-                showConfirmButton: false,
-                width: '300px',
-                timer: '3000',
-              });
-              navigate('/homepage/keranjang');
-          } else {
-            Swal.fire({
-                icon: 'error',
-                title: '<span style="font-size: 16px; color: green;">Gagal menambahkan ke keranjang</span>',
-                showConfirmButton: false,
-                width: '300px',
-                timer: '3000',
-              });
-          }
-    }
 
   return (
     <div className='p-3'>
@@ -94,9 +58,11 @@ const CatalogProduct = () => {
                 </div>
             </div>
 
-            <div style={{float: 'right'}}>
-                <Icon icon="bxs:cart-add" color="#b31312" width="35" height="30" onClick={handleAddCart}/>
-            </div>
+            <Link to={'/homepage/keranjang'}>
+                <div style={{float: 'right'}}>
+                    <Icon icon="bxs:cart-add" color="#b31312" width="35" height="30" />
+                </div>
+            </Link>
             <div className="desc-product mt-3" id="desc-product">
                 <p className='fs-6 fw-bold mb-2'>Deskripsi</p>
                 <p className="lh-sm" style={{textAlign: 'justify', fontSize: '14px'}}>{product.deskripsi}</p>
