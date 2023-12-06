@@ -3,7 +3,7 @@ import { productId } from '../../services/product';
 import { useParams } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 
-const OrderProcessSuccess = () => {
+const OrderProcessSuccessPrev = () => {
     const [product, setProduct] = useState({
         nama_produk: '',
         harga: ''
@@ -111,4 +111,4 @@ const OrderProcessSuccess = () => {
     )
 }
 
-export default OrderProcessSuccess;
+export default OrderProcessSuccessPrev;

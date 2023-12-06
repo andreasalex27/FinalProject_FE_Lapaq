@@ -5,7 +5,7 @@ import { Icon } from '@iconify/react';
 import { productId } from '../../services/product';
 import { useParams } from 'react-router-dom';
 
-const CatalogProduct = () => {
+const CatalogProductPrev = () => {
     const [product, setProduct] = useState({
         image: 'https://i.imgur.com/2a0RWOy.jpg',
         nama_produk: '',
@@ -116,4 +116,4 @@ const CatalogProduct = () => {
   );
 };
 
-export default CatalogProduct;
+export default CatalogProductPrev;

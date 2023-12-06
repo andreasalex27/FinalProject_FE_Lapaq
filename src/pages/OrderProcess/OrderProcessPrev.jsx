@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import { productList } from '../../services/product';
 import { Link } from 'react-router-dom';
 
-const OrderProcess = () => {
+const OrderProcessPrev = () => {
   const [products, setProducts] = useState([]);
   const [activeFilter, setActiveFilter] = useState('kemas');
 
@@ -169,4 +169,4 @@ const OrderProcess = () => {
   );
 };
 
-export default OrderProcess;
+export default OrderProcessPrev;

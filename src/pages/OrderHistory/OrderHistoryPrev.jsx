@@ -5,7 +5,7 @@ import { productId } from '../../services/product';
 import { getUserToken } from '../../utils/jwt';
 import Swal from 'sweetalert2';
 
-const OrderHistory = () => {
+const OrderHistoryPrev = () => {
   const [products, setProducts] = useState([]);
   const [tokenUser, setTokenUser] = useState();
   const [activeFilter, setActiveFilter] = useState('');
@@ -103,4 +103,4 @@ const OrderHistory = () => {
   );
 };
 
-export default OrderHistory;
+export default OrderHistoryPrev;

@@ -5,7 +5,7 @@ import { getUserToken } from '../../utils/jwt';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
-const TransactionOrder = () => {
+const TransactionOrderPrev = () => {
   const [products, setProducts] = useState([]);
   const [tokenUser, setTokenUser] = useState(null)
   const [activeFilter, setActiveFilter] = useState('Bayar');
@@ -201,4 +201,4 @@ const TransactionOrder = () => {
   );
 };
 
-export default TransactionOrder;
+export default TransactionOrderPrev;

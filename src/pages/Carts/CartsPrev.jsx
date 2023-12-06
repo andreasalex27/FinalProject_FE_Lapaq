@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
 import { productList } from '../../services/product';
 
-const Carts = () => {
+const CartsPrev = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -84,4 +84,4 @@ const Carts = () => {
   );
 };
 
-export default Carts;
+export default CartsPrev;

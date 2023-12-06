@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { addComment } from '../../services/order';
 import { getUserToken } from '../../utils/jwt';
 
-const TransactionReview = () => {
+const TransactionReviewPrev = () => {
     const [tokenUser, setTokenUser] = useState(null);
     const [formData, setFormData] = useState({
       nama: '',
@@ -110,4 +110,4 @@ const TransactionReview = () => {
   );
 };
 
-export default TransactionReview;
+export default TransactionReviewPrev;
