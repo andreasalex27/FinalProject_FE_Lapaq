@@ -16,7 +16,7 @@ const BuyerLayout = ({ children }) => {
                     <Link to="/homepage/keranjang">
                         <Icon icon="mdi:cart" color="#b31312" width="30" />
                     </Link>
-                    <Link to="/homepage/daftar-toko">
+                    <Link to="/homepage/masuk-toko">
                         <Icon icon="material-symbols:team-dashboard" color="#b31312" width="30" />
                     </Link>
                     <Link to="/homepage/riwayat">

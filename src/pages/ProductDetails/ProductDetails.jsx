@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { productId, deleteProductId } from '../../services/product';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getUserTokenSeller } from '../../utils/jwt';
 import Swal from 'sweetalert2';
 
 const ProductDetails = () => {
     const navigate = useNavigate();
+    const [tokenUserSeller, setTokenUserSeller] = useState(null)
     const [product, setProduct] = useState({
         image: 'https://i.imgur.com/2a0RWOy.jpg',
         nama_produk: '',
@@ -34,7 +36,10 @@ const ProductDetails = () => {
 
     const handleDeleteProduct = async () => {
         try {
-            const response = await deleteProductId(_id);
+            const tokenUserData = getUserTokenSeller();
+            console.log(tokenUserData)
+            setTokenUserSeller(tokenUserData)
+            const response = await deleteProductId(tokenUserData.token, _id);
             if (response) {
                 Swal.fire({
                     icon: 'success',
@@ -67,8 +72,8 @@ const ProductDetails = () => {
     };
 
   return (
-    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px'}}>
-        <div className="container-fluid p-0" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto'}}>
+    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px', height: '100vh'}}>
+        <div className="container-fluid p-0" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto', height: '100%', overflow: 'auto'}}>
             <div className='pt-4 pb-1' style={{boxShadow: '0 3px 3px rgba(0, 0, 0, 0.5)', marginBottom: '3px'}}>
                 <p className='text-center fs-6 fw-bold' style={{color: '#B31312'}}>Detail Produk</p>
             </div>

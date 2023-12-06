@@ -3,7 +3,6 @@ import Swal from 'sweetalert2';
 import { addProduct } from '../../services/product';
 import { getUserTokenSeller } from '../../utils/jwt';
 
-
 const AddProduct = () => {
   const [tokenUserSeller, setTokenUserSeller] = useState(null)
 

@@ -73,7 +73,7 @@ const Homepage = () => {
 
         <div className="container-fluid pt-4">
           <div className="d-flex justify-content-center align-items-center text-center gap-3 mx-auto">
-            <Link to="/homepage/daftar-toko" className='text-decoration-none'>
+            <Link to="/homepage/masuk-toko" className='text-decoration-none'>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div className="bg-white rounded d-flex justify-content-center align-items-center" style={{ height: "40px", width: "40px" }}>
                   <Icon icon="material-symbols:team-dashboard" color="#2b2a4c" width="25" />

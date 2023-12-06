@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { editProductId, productId } from '../../services/product';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getUserTokenSeller } from '../../utils/jwt';
 
 const EditProduct = () => {
     const navigate = useNavigate();
+    const [tokenUserSeller, setTokenUserSeller] = useState(null)
     const { _id } = useParams();
 
     const [formData, setFormData] = useState({
@@ -54,7 +56,10 @@ const EditProduct = () => {
         event.preventDefault();
 
         try {
-            const response = await editProductId(_id, formData);
+            const tokenUserData = getUserTokenSeller();
+            console.log(tokenUserData)
+            setTokenUserSeller(tokenUserData)
+            const response = await editProductId(tokenUserData.token, _id, formData);
             if (response) {
                 Swal.fire({
                     position: 'center',
@@ -81,8 +86,8 @@ const EditProduct = () => {
     };
 
   return (
-    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px', height: '105vh'}}>
-        <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto', height: '100%'}}>
+    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px', height: '100vh'}}>
+        <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto', height: '100%', overflow: 'auto'}}>
 
             <div className='pt-4 pb-1' style={{boxShadow: '0 3px 3px rgba(0, 0, 0, 0.5)', marginBottom: '3px'}}>
                 <p className='text-center fs-6 fw-bold' style={{color: '#B31312'}}>Edit Produk</p>

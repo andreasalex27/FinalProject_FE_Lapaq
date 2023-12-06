@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { sellerId, editSellerId } from "../../services/user";
-import { getUserTokenSeller } from "../../utils/jwt";
+import { getUserTokenSeller, deleteTokenSeller } from "../../utils/jwt";
 
 const ProfileSeller = () => {
     const navigate = useNavigate();
@@ -30,6 +31,31 @@ const ProfileSeller = () => {
         
           fetchData();
         }, []);
+
+    const handleLogout = () => {
+        try {
+            deleteTokenSeller();
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '<span style="font-size: 16px; color: green;">Berhasil logout</span>',
+                showConfirmButton: false,
+                width: '300px',
+                timer: 2000,
+            });
+            navigate('/homepage');
+        } catch (error) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: '<span style="font-size: 16px; color: green;">Gagal logout</span>',
+                showConfirmButton: false,
+                width: '300px',
+                timer: 2000,
+            });
+            console.log(error)
+        }
+    }
 
     const openEditProfileSeller = () => {
         navigate('/homepage/dashboard/profile/edit');
@@ -70,7 +96,7 @@ const ProfileSeller = () => {
 
             <div className="d-grid gap-2 mx-4">
                 <button className="btn fw-bold" type="button" onClick={openEditProfileSeller} style={{backgroundColor: '#B31312', color: 'white'}}>Edit Profil</button>
-                <button className="btn fw-bold" type="button" style={{backgroundColor: '#EA906C', color: '#B31312'}}>Logout</button>
+                <button className="btn fw-bold" type="button" style={{backgroundColor: '#EA906C', color: '#B31312'}} onClick={handleLogout}>Logout</button>
             </div>
         </>
 

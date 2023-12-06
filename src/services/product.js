@@ -39,9 +39,13 @@ const addProduct = async (formData) => {
   }
 }
 
-const editProductId = async (_id, formData) => {
+const editProductId = async (token, _id, formData) => {
   try {
-      const response = await axios.put(`${API_URL}/api/produk/${_id}`, formData);
+      const response = await axios.put(`${API_URL}/api/produk/${_id}`, formData, {
+        headers: {
+        Authorization: `Bearer ${token}`,
+        }
+      });
       console.log(response.data);
       return response.data;     
   } catch (error) {
@@ -50,9 +54,13 @@ const editProductId = async (_id, formData) => {
   }
 }
 
-const deleteProductId = async (_id) => {
+const deleteProductId = async (token, _id) => {
   try {
-      const response = await axios.delete(`${API_URL}/api/produk/${_id}`);
+      const response = await axios.delete(`${API_URL}/api/produk/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          }
+      });
       console.log(response.data);
       return response.data;     
   } catch (error) {
