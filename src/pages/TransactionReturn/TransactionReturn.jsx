@@ -72,7 +72,7 @@ const TransactionReturn = () => {
                     </div>
                     <div className="mb-3 mt-4">
                         <label htmlFor="exampleFormControlTextarea1" className="form-label" style={{fontSize: '15px'}}>Masalah lainnya:</label>
-                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" style={{border: '2px solid #2B2A4C'}}></textarea>
                     </div>
 
                     <div className="d-grid gap-2 mt-5">

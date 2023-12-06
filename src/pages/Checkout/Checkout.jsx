@@ -98,7 +98,7 @@ function Checkout() {
         </div>
 
         <div className="d-flex justify-content-between align-items-center container-md p-0 m-0">
-          <div style={{ width: "210px" }}>
+          <div>
             <p className="m-0 lh" style={{ fontSize: "14px" }}>
               {tokenUser && tokenUser.user && tokenUser.user.alamat
                 ? tokenUser.user.alamat
@@ -188,7 +188,7 @@ function Checkout() {
             <p className="fw-bolder mb-0">Ongkos Kirim</p>
           </div>
           <div id="ongkir" className="align-items-center fw-bold">
-            Rp 10.000
+            Rp 10000
           </div>
         </div>
 

@@ -36,7 +36,7 @@ const getUserTokenSeller = () => {
 }
 
 const deleteTokenUser = () => {
-    Cookies.remove('token')
+    Cookies.remove('token, tokenSeller')
 }
 
 const deleteTokenSeller = () => {
