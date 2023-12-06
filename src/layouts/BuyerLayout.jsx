@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const BuyerLayout = ({ children }) => {
     return (
-        <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px'}}>
-            <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto' }}>
+        <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px', height: '100vh'}}>
+            <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto', height: '100%', overflow: 'auto' }}>
                 {children}
             </div>
 
@@ -22,7 +22,7 @@ const BuyerLayout = ({ children }) => {
                     <Link to="/homepage/riwayat">
                         <Icon icon="icon-park-solid:buy" color="#b31312" width="30" />  
                     </Link>
-                    <Link to="/homepage/profile/:_id">
+                    <Link to="/homepage/profile">
                         <Icon icon="iconamoon:profile-fill" color="#b31312" width="30" />            
                     </Link>
                 </div>

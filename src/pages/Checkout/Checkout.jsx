@@ -3,12 +3,12 @@ import Swal from "sweetalert2";
 import { useParams, useNavigate } from "react-router-dom";
 import { productId } from "../../services/product";
 import { addOrder } from "../../services/order";
-import { getUserToken } from '../../utils/jwt';
+import { getUserToken } from "../../utils/jwt";
 
 function Checkout() {
   const navigate = useNavigate();
-  const [selectedPayment, setSelectedPayment] = useState(null)
-  const [tokenUser, setTokenUser] = useState(null)
+  const [selectedPayment, setSelectedPayment] = useState(null);
+  const [tokenUser, setTokenUser] = useState(null);
   const { _id } = useParams();
   const [product, setProduct] = useState({
     harga: "",
@@ -18,10 +18,10 @@ function Checkout() {
 
   useEffect(() => {
     const tokenUserData = getUserToken();
-    console.log(tokenUserData)
-    setTokenUser(tokenUserData)
+    console.log(tokenUserData);
+    setTokenUser(tokenUserData);
   }, []);
-  
+
   useEffect(() => {
     getProductDetails();
   }, [_id]);
@@ -42,30 +42,41 @@ function Checkout() {
   };
 
   const handlePaymentMetodeChange = (e) => {
-    setSelectedPayment(e.target.value)
-  }
+    setSelectedPayment(e.target.value);
+  };
 
-  const createOrder = async() => {
+  const createOrder = async () => {
     const body = {
       user_buyer_id: tokenUser.user._id,
-      user_seller_id: product.seller_id, 
-      product_id: product._id, 
+      user_seller_id: product.seller_id,
+      product_id: product._id,
       metode_pembayaran: selectedPayment,
-      status_order: "completed"
-    }
-    const result = await addOrder(body, tokenUser.token) 
-    if (result){
+      status_order: "completed",
+    };
+
+    const result = await addOrder(body, tokenUser.token);
+    if (result) {
       Swal.fire({
-        icon: 'success',
-        title: '<span style="font-size: 16px; color: green;">Berhasil</span>',
+        icon: "success",
+        title:
+          '<span style="font-size: 16px; color: green;">Berhasil checkout</span>',
         showConfirmButton: false,
-        width: '300px',
-        timer: '3000',
+        width: "300px",
+        timer: "3000",
       });
 
-      navigate('/homepage/transaksi');
-    }
-  }
+      navigate("/homepage/transaksi");
+    } else {
+          Swal.fire({
+            icon: "question",
+            title:
+              '<span style="font-size: 16px; color: blue;">Pilih metode pembayaran</span>',
+            showConfirmButton: false,
+            width: "300px",
+            timer: "3000",
+          });
+      }
+  };
 
   return (
     <div
@@ -89,7 +100,9 @@ function Checkout() {
         <div className="d-flex justify-content-between align-items-center container-md p-0 m-0">
           <div style={{ width: "210px" }}>
             <p className="m-0 lh" style={{ fontSize: "14px" }}>
-            {tokenUser && tokenUser.user && tokenUser.user.alamat ? tokenUser.user.alamat : 'Alamat tidak tersedia'}
+              {tokenUser && tokenUser.user && tokenUser.user.alamat
+                ? tokenUser.user.alamat
+                : "Alamat tidak tersedia"}
             </p>
           </div>
           {/*<div>
@@ -161,9 +174,7 @@ function Checkout() {
 
         <hr className="m-1" />
 
-        <div
-          className="d-flex justify-content-between align-items-center container-md m-0 pt-2 px-0"
-        >
+        <div className="d-flex justify-content-between align-items-center container-md m-0 pt-2 px-0">
           <div className="align-items-center">
             <p className="fw-bolder mb-0">Harga Produk</p>
           </div>
@@ -172,9 +183,7 @@ function Checkout() {
           </div>
         </div>
 
-        <div
-          className="d-flex justify-content-between align-items-center container-md m-0 px-0"
-        >
+        <div className="d-flex justify-content-between align-items-center container-md m-0 px-0">
           <div className="align-items-center">
             <p className="fw-bolder mb-0">Ongkos Kirim</p>
           </div>
@@ -191,7 +200,7 @@ function Checkout() {
             <p className="fw-bolder mb-0">Total Harga</p>
           </div>
           <div id="total" className="align-items-center fw-bold">
-            Rp {totalHarga} 
+            Rp {totalHarga}
           </div>
         </div>
 
@@ -220,7 +229,7 @@ function Checkout() {
                 value="Bank Republik Indonesia"
                 id="flexRadioDefault1"
                 onChange={handlePaymentMetodeChange}
-                checked={selectedPayment === 'Bank Republik Indonesia'}
+                checked={selectedPayment === "Bank Republik Indonesia"}
               />
             </div>
           </div>
@@ -237,7 +246,7 @@ function Checkout() {
                 value="Bank Central Asia"
                 id="flexRadioDefault1"
                 onChange={handlePaymentMetodeChange}
-                checked={selectedPayment === 'Bank Central Asia'}
+                checked={selectedPayment === "Bank Central Asia"}
               />
             </div>
           </div>
@@ -254,7 +263,7 @@ function Checkout() {
                 value="Qris"
                 id="flexRadioDefault1"
                 onChange={handlePaymentMetodeChange}
-                checked={selectedPayment === 'Qris'}
+                checked={selectedPayment === "Qris"}
               />
             </div>
           </div>
@@ -271,7 +280,7 @@ function Checkout() {
                 value="Bayar di tempat"
                 id="flexRadioDefault1"
                 onChange={handlePaymentMetodeChange}
-                checked={selectedPayment === 'Bayar di tempat'}
+                checked={selectedPayment === "Bayar di tempat"}
               />
             </div>
           </div>

@@ -131,7 +131,8 @@ const SignIn = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="cta mb-5">
+            {/*
+              <div className="cta mb-5">
               <div className="cta-ingat-saya">
                 <input type="checkbox" id="cb-ingat-saya" name="ingatSaya" />
                 <label htmlFor="ingatSaya">Ingat Saya </label>
@@ -140,7 +141,8 @@ const SignIn = () => {
                 <a href="lupa-sandi">Lupa Sandi</a>
               </button>
             </div>
-            <button type="submit" id="btn-login" className='mt-0'>LOG IN</button>
+            */}
+            <button type="submit" id="btn-login" className='mt-5'>LOG IN</button>
           </form>
         </div>
         <div className="saran">

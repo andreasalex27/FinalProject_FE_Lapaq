@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { sellerId, editSellerId } from "../../services/user";
+import { sellerId } from "../../services/user";
 import { getUserTokenSeller, deleteTokenSeller } from "../../utils/jwt";
 
 const ProfileSeller = () => {

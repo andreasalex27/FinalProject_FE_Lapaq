@@ -35,7 +35,7 @@ const EditProfileSeller = () => {
           });
         }
       } catch (error) {
-        console.error("Gagal mengambil data produk:", error);
+        console.error("Gagal mengambil data profile:", error);
       }
     };
 
@@ -79,10 +79,8 @@ const EditProfileSeller = () => {
         showConfirmButton: false,
         width: "300px",
         timer: "3000",
-        customClass: {
-          title: "custom-title-class", // Nama class untuk style khusus (opsional)
-        },
       });
+      navigate('/homepage/dashboard/profile');
     } else {
         Swal.fire({
             icon: "error",
@@ -91,9 +89,6 @@ const EditProfileSeller = () => {
             showConfirmButton: false,
             width: "300px",
             timer: "3000",
-            customClass: {
-              title: "custom-title-class", // Nama class untuk style khusus (opsional)
-            },
           });
     }
   };

@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 import { buyerId } from "../../services/user";
+import { getUserToken, deleteTokenUser } from "../../utils/jwt";
 
 const ProfileBuyer = () => {
     const navigate = useNavigate();
-    const { _id } = useParams();
+    const [tokenUser, setTokenUser] = useState(null);
     const [buyerData, setbuyerData] = useState(null);
-    const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
+        const tokenUserData = getUserToken();
+        console.log('Token User Data:', tokenUserData);
+        if (!tokenUserData) {
+            navigate('/homepage/daftar-toko');
+        } else {
+            setTokenUser(tokenUserData);
+        }
+
         const fetchbuyerData = async () => {
             try {
-                const data = await buyerId(_id);
+                const data = await buyerId(tokenUserData.user._id);
                 setbuyerData(data.payload); // Menyimpan data payload dari response
             } catch (error) {
                 console.error('Error fetching buyer data:', error);
@@ -19,15 +28,35 @@ const ProfileBuyer = () => {
         };
 
         fetchbuyerData();
-    }, [_id]);
+    }, []);
 
-    // Fungsi untuk menampilkan/hide password
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
+    const handleLogout = () => {
+        try {
+            deleteTokenUser();
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '<span style="font-size: 16px; color: green;">Berhasil logout</span>',
+                showConfirmButton: false,
+                width: '300px',
+                timer: 2000,
+            });
+            navigate('/');
+        } catch (error) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: '<span style="font-size: 16px; color: green;">Gagal logout</span>',
+                showConfirmButton: false,
+                width: '300px',
+                timer: 2000,
+            });
+            console.log(error)
+        }
+    }
 
     const openEditProfileBuyer = () => {
-        navigate(`/homepage/profile/edit/${buyerData._id}`);
+        navigate('/homepage/profile/edit');
       };
 
     return (
@@ -67,18 +96,6 @@ const ProfileBuyer = () => {
 
                     <div className="mb-3">
                         <div className="mb-0">
-                            <p className="fw-bold mb-2" style={{ color: '#2B2A4C', fontSize: '14px' }}>Password</p>
-                        </div>
-                        <div className="d-flex align-items-center rounded px-2" style={{ border: '2px solid #2B2A4C', height: '40px' }}>
-                            <input type={showPassword ? 'text' : 'password'} value={buyerData?.password || '-'} readOnly style={{ border: 'none', outline: 'none', fontSize: '14px', width: '85%'}}/>
-                            <button type="button" onClick={togglePasswordVisibility} style={{ border: 'none', background: 'transparent', cursor: 'pointer', outline: 'none' }}>
-                                {showPassword ? 'Hide' : 'Show'}
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className="mb-3">
-                        <div className="mb-0">
                             <p className="fw-bold mb-2" style={{color: '#2B2A4C', fontSize: "14px"}}>NIK</p>
                         </div>
                         <div className="align-items-center rounded px-2" style={{ border: '2px solid #2B2A4C', height: '40px' }}>
@@ -88,7 +105,7 @@ const ProfileBuyer = () => {
 
                     <div className="mb-3">
                         <div className="mb-0">
-                            <p className="fw-bold mb-2" style={{color: '#2B2A4C', fontSize: "14px"}}>Alamat Toko</p>
+                            <p className="fw-bold mb-2" style={{color: '#2B2A4C', fontSize: "14px"}}>Alamat</p>
                         </div>
                         <div className="align-items-center rounded px-2 py-1" style={{ border: '2px solid #2B2A4C', height: '80px' }}>
                             <p style={{lineHeight: '20px', fontSize: '14px'}}>{buyerData?.alamat || '-'}</p>
@@ -98,7 +115,7 @@ const ProfileBuyer = () => {
 
                 <div className="d-grid gap-2 mx-4">
                     <button className="btn fw-bold" type="button" onClick={openEditProfileBuyer} style={{backgroundColor: '#B31312', color: 'white'}}>Edit Profil</button>
-                    <button className="btn fw-bold" type="button" style={{backgroundColor: '#EA906C', color: '#B31312'}}>Logout</button>
+                    <button className="btn fw-bold" type="button" style={{backgroundColor: '#EA906C', color: '#B31312'}} onClick={handleLogout}>Logout</button>
                 </div>
             </div>
         </div>

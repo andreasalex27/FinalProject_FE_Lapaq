@@ -68,11 +68,11 @@ const ROUTE_LIST = [
         element: <BuyerLayout><Carts/></BuyerLayout>,
     },
     {
-        path: '/homepage/profile/:_id',
+        path: '/homepage/profile',
         element: <BuyerLayout><ProfileBuyer/></BuyerLayout>,
     },
     {
-        path: '/homepage/profile/edit/:_id',
+        path: '/homepage/profile/edit',
         element: <BuyerLayout><EditProfileBuyer/></BuyerLayout>,
     },
     {

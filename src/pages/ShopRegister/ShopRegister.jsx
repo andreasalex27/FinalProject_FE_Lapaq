@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { shopRegister } from '../../services/auth';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
@@ -116,14 +116,14 @@ const ShopRegister = () => {
   };
 
   return (
-    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', overflow: 'auto'}}>
+    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', overflow: 'auto', height: '100vh'}}>
       <div className="container pt-5 mb-0" style={{ maxWidth: '390px', backgroundColor: 'white', height: '100%' }}>
       
       <img src="https://i.imgur.com/OXNQ3Sf.png" className="img-fluid d-block mx-auto mb-4" alt="Toko" width="100" />
         
         <h1 className="text-center fs-3 my-5 fw-bold" style={{ color: '#B31312' }}>Daftar Toko</h1>
         
-        <form className="m-4 mb-5" onSubmit={handleSubmit}>
+        <form className="m-4 mb-3" onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="namaToko" className="form-label" style={clNavy}>Nama Toko</label>
             <input type="text" className="form-control" style={bdNavy} id="namaToko" name="namaToko" value={formData.namaToko} onChange={handleChange} />
@@ -141,6 +141,11 @@ const ShopRegister = () => {
               <button type="submit" className="btn mb-2 fw-bold text-white" style={{ backgroundColor: '#B31312'}}>Daftar Toko</button>
           </div>
         </form>
+
+        <div className='text-center' style={{fontSize: '13px'}}>
+          <span>Sudah punya toko?</span>
+          <span className='ms-2'><Link to = '/homepage/masuk-toko' className='text-decoration-none'>Masuk toko</Link></span>
+        </div>
 
       </div>
     </div>

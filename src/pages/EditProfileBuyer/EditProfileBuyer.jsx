@@ -1,46 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 import { buyerId, editBuyerId } from '../../services/user';
-import { useParams } from 'react-router-dom';
+import { getUserToken } from '../../utils/jwt';
 
 const EditProfileBuyer = () => {
-    const { _id } = useParams();
-
+    const navigate = useNavigate();
+    const [tokenUser, setTokenUser] = useState(null);
     const [formData, setFormData] = useState({
-        namaDepan: '',
-        namaBelakang: '',
+        nama_depan: '',
+        nama_belakang: '',
         email: '',
-        password: '',
-        noNik: '',
         alamat: ''
     });
 
     useEffect(() => {
-        const fetchProduct = async () => {
+        const tokenUserData = getUserToken();
+        console.log("Token User Data:", tokenUserData);
+        if (!tokenUserData) {
+          navigate("/welcome/sign-in");
+        } else {
+          setTokenUser(tokenUserData);
+        }
+
+        const fetchBuyer = async () => {
             try {
-                const productData = await buyerId(_id);
+                const userBuyerId = tokenUserData.user._id;
+                const response = await buyerId(userBuyerId);
     
-                if (productData) {
-                    console.log('Product Data:', productData);
-    
+                if (response) {
+                    console.log(response.payload);
                     setFormData({
-                        namaDepan: productData.payload.nama_depan || '',
-                        namaBelakang: productData.payload.nama_belakang || '',
-                        email: productData.payload.email || '',
-                        password: productData.payload.password || '',
-                        noNik: productData.payload.nik || '',
-                        alamat: productData.payload.alamat || '',
+                        nama_depan: response.payload.nama_depan,
+                        nama_belakang: response.payload.nama_belakang,
+                        email: response.payload.email,
+                        alamat: response.payload.alamat
                     });
                 }
             } catch (error) {
-                console.error('Gagal mengambil data produk:', error);
+                console.error('Gagal mengambil data profile:', error);
             }
         };
     
-        fetchProduct();
-    }, [_id]);
-    
-    
+        fetchBuyer();
+    }, []);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -52,28 +55,41 @@ const EditProfileBuyer = () => {
     };
     
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        try {
-            const response = await editBuyerId(_id, formData);
-            if (response && response.message === 'data berhasil diubah') {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: '<span style="font-size: 16px; color: green;">Produk berhasil diubah</span>',
-                    showConfirmButton: false,
-                    width: '300px',
-                    timer: 2000,
-                });
-            } else {
-                throw new Error('Gagal mengubah produk');
-            }
-        } catch (error) {
-            console.error('Error editing product:', error);
+        const { nama_depan, nama_belakang, email, alamat } = formData;
+        if (!nama_depan.trim() || !nama_belakang.trim(), !email.trim(), !alamat.trim()) {
+            Swal.fire({
+              icon: "error",
+              title:
+                '<span style="font-size: 16px; color: red;">Form tidak boleh kosong</span>',
+              showConfirmButton: false,
+              width: "300px",
+              timer: "3000",
+              customClass: {
+                title: "custom-title-class", // Nama class untuk style khusus (opsional)
+              },
+            });
+            return;
+          }
+
+        const userBuyerId = tokenUser.user._id;
+        const response = await editBuyerId(userBuyerId, formData, tokenUser.token);
+        if (response) {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '<span style="font-size: 16px; color: green;">Profile berhasil diubah</span>',
+                showConfirmButton: false,
+                width: '300px',
+                timer: 2000,
+            });
+            navigate('/homepage/profile');
+        } else {
             Swal.fire({
                 icon: 'error',
-                title: '<span style="font-size: 16px; color: red;">Gagal mengubah produk</span>',
+                title: '<span style="font-size: 16px; color: red;">Gagal mengubah profile</span>',
                 showConfirmButton: false,
                 width: '300px',
                 timer: '3000',
@@ -93,33 +109,23 @@ const EditProfileBuyer = () => {
                 <form onSubmit={handleSubmit}>
 
                     <div className='mb-3'>
-                        <label htmlFor="product" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Nama Depan</label>
-                        <input type="text" className="form-control" name="product" placeholder="Masukkan Nama Produk" defaultValue={formData.namaDepan} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
+                        <label htmlFor="nama_depan" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Nama Depan</label>
+                        <input type="text" className="form-control" name="nama_depan" placeholder="Tidak ditemukan" defaultValue={formData.nama_depan} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
                     </div>
 
                     <div className='mb-3'>
-                        <label htmlFor="product" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Nama Belakang</label>
-                        <input type="text" className="form-control" name="product" placeholder="Masukkan Nama Produk" value={formData.namaBelakang} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
+                        <label htmlFor="nama_belakang" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Nama Belakang</label>
+                        <input type="text" className="form-control" name="nama_belakang" placeholder="Tidak ditemukan" defaultValue={formData.nama_belakang} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
                     </div>
 
                     <div className='mb-3'>
-                        <label htmlFor="product" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Alamat Email</label>
-                        <input type="text" className="form-control" name="product" placeholder="Masukkan Nama Produk" value={formData.email} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
+                        <label htmlFor="email" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Alamat Email</label>
+                        <input type="text" className="form-control" name="email" placeholder="Tidak ditemukan" defaultValue={formData.email} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
                     </div>
 
                     <div className='mb-3'>
-                        <label htmlFor="product" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Password</label>
-                        <input type="text" className="form-control" name="product" placeholder="Masukkan Nama Produk" value={formData.password} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
-                    </div>
-
-                    <div className='mb-3'>
-                        <label htmlFor="product" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>NIK</label>
-                        <input type="text" className="form-control" name="product" placeholder="Masukkan Nama Produk" value={formData.noNik} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
-                    </div>
-
-                    <div className='mb-3'>
-                        <label htmlFor="deskripsi" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Alamat</label>
-                        <textarea name="deskripsi" className="form-control" placeholder="Masukkan Deskripsi Produk" value={formData.alamat} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '150px' }}/>
+                        <label htmlFor="alamat" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Alamat</label>
+                        <textarea name="alamat" className="form-control" placeholder="Tidak ditemukan" rows="3" defaultValue={formData.alamat} onChange={handleChange} style={{ border: '2px solid #2B2A4C' }}/>
                     </div>
 
                     <div className="d-grid gap-2 mt-4 mb-3">
