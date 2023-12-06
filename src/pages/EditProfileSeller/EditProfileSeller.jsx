@@ -31,7 +31,7 @@ const EditProfileSeller = () => {
           console.log(response.payload);
           setProfileData({
             nama_toko: response.payload.nama_toko,
-            alamat_toko: response.payload.alamat_toko
+            alamat_toko: response.payload.alamat_toko,
           });
         }
       } catch (error) {
@@ -70,7 +70,11 @@ const EditProfileSeller = () => {
     }
 
     const userSellerId = tokenUserSeller.user_id;
-    const response = await editSellerId(userSellerId, profileData, tokenUserSeller.token);
+    const response = await editSellerId(
+      userSellerId,
+      profileData,
+      tokenUserSeller.token
+    );
     if (response) {
       Swal.fire({
         icon: "success",
@@ -80,16 +84,16 @@ const EditProfileSeller = () => {
         width: "300px",
         timer: "3000",
       });
-      navigate('/homepage/dashboard/profile');
+      navigate("/homepage/dashboard/profile");
     } else {
-        Swal.fire({
-            icon: "error",
-            title:
-              '<span style="font-size: 16px; color: red;">Gagal edit profile</span>',
-            showConfirmButton: false,
-            width: "300px",
-            timer: "3000",
-          });
+      Swal.fire({
+        icon: "error",
+        title:
+          '<span style="font-size: 16px; color: red;">Gagal edit profile</span>',
+        showConfirmButton: false,
+        width: "300px",
+        timer: "3000",
+      });
     }
   };
 

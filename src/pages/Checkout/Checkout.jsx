@@ -67,15 +67,15 @@ function Checkout() {
 
       navigate("/homepage/transaksi");
     } else {
-          Swal.fire({
-            icon: "question",
-            title:
-              '<span style="font-size: 16px; color: blue;">Pilih metode pembayaran</span>',
-            showConfirmButton: false,
-            width: "300px",
-            timer: "3000",
-          });
-      }
+      Swal.fire({
+        icon: "question",
+        title:
+          '<span style="font-size: 16px; color: blue;">Pilih metode pembayaran</span>',
+        showConfirmButton: false,
+        width: "300px",
+        timer: "3000",
+      });
+    }
   };
 
   return (
