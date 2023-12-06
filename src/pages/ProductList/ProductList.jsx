@@ -55,7 +55,7 @@ const ProductList = () => {
                     </div>
                     <div className="d-flex align-items-center">
                       <Icon icon="tabler:star-filled" color="#ea906c" width="17" height="17"/>
-                      <span className='fs-6 ms-1 fw-bold' style={{ color:"#ea906c" }}>{product.rating || <p className="mb-0">0,0</p>}</span>
+                      <span className='fs-6 ms-1 fw-bold' style={{ color:"#ea906c" }}>{product.rating || <p className="mb-0">5,0</p>}</span>
                     </div>
                   </div>
                 </div>

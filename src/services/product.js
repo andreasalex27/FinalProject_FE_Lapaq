@@ -24,11 +24,12 @@ const productId = async (_id) => {
     }
 }
 
-const addProduct = async (formData) => {
+const addProduct = async (formData, token) => {
   try {
     const response = await axios.post(`${API_URL}/api/produk`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data', // Atur tipe konten sebagai form data
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
       },
     });
     console.log(response.data);

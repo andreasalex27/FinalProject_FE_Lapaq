@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 import { addProduct } from '../../services/product';
 import { getUserTokenSeller } from '../../utils/jwt';
 
 const AddProduct = () => {
+  const navigate = useNavigate()
   const [tokenUserSeller, setTokenUserSeller] = useState(null)
-
   const [formData, setFormData] = useState({
     img: null,
     product: '',
@@ -19,7 +20,6 @@ const AddProduct = () => {
 
   useEffect(() => {
     const tokenUserData = getUserTokenSeller();
-
     console.log(tokenUserData)
     setTokenUserSeller(tokenUserData)
   }, []);
@@ -81,7 +81,7 @@ const AddProduct = () => {
       data.append('image', formData.img);
 
       // Panggil fungsi addProduct dengan formData yang telah dibuat
-      const response = await addProduct(data);
+      const response = await addProduct(data, tokenUserSeller.token);
 
       if (response && response.message === 'data berhasil ditambahkan') {
         Swal.fire({
@@ -103,8 +103,7 @@ const AddProduct = () => {
           kategori: '',
         });
 
-        window.location.href = '/homepage/dashboard/produk-saya';
-
+        navigate('/homepage/dashboard/produk-saya');
 
         // Reset input file value after successful submission
       if (imageInputRef.current) {
@@ -126,8 +125,8 @@ const AddProduct = () => {
   }
 
   return (
-    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px', height: '105vh'}}>
-        <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto', height: '100%'}}>
+    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px', height: '100vh'}}>
+        <div className="container-md p-0 pb-5" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto', height: '100%', overflow: 'auto'}}>
 
             <div className='pt-4 pb-1' style={{boxShadow: '0 3px 3px rgba(0, 0, 0, 0.5)', marginBottom: '3px'}}>
                 <p className='text-center fs-6 fw-bold' style={{color: '#B31312'}}>Tambah Produk</p>
@@ -159,7 +158,7 @@ const AddProduct = () => {
                         <label htmlFor="harga" className="form-label fw-bold" style={{color: '#2B2A4C', fontSize: "14px"}}>Harga Produk</label>
                         <div className="input-group mb-3">
                           <span className="input-group-text" id="basic-addon1" style={{ border: '2px solid #2B2A4C', height: '40px' }}>Rp</span>
-                          <input type="number" className="form-control" name="harga" placeholder="Contoh: 25.000" value={formData.harga} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
+                          <input type="number" className="form-control" name="harga" placeholder="Contoh: 25000" value={formData.harga} onChange={handleChange} style={{ border: '2px solid #2B2A4C', height: '40px' }}/>
                         </div>
                     </div>
 

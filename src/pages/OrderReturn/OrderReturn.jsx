@@ -47,7 +47,7 @@ const OrderReturn = () => {
         <button onClick={() => setActiveFilter('Proses')} style={activeFilter === 'Proses' ? { backgroundColor: '#2B2A4C', color: '#fff', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px', marginRight: '5px', width: '150px' } : { backgroundColor: '#fff', color: '#2B2A4C', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px', marginRight: '5px', width: '150px', border: 'none'  }}>Proses</button>
         <button onClick={() => setActiveFilter('selesai')} style={activeFilter === 'selesai' ? { backgroundColor: '#2B2A4C', color: '#fff', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px', marginRight: '5px', width: '150px'  } : { backgroundColor: '#fff', color: '#2B2A4C', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px', marginRight: '5px', width: '150px', border: 'none'  }}>Selesai</button>
       </div>
-      <div className='proses container m-3 p-1 mt-0 rounded' style={{ display: activeFilter === 'Proses' ? 'block' : 'none', border: '1px solid #2b2a4c', width: '360px'  }}>
+      <div className='proses container m-3 p-1 mt-0 rounded' style={{ display: activeFilter === 'Proses' ? 'block' : 'none', border: '1px solid #2b2a4c', width: '340px'  }}>
         <div className='row g-2 px-2'>
           {products.map(product => (
             <div className='card mb-1 py-3 px-2 border border-0' key={product._id} style={{ boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)' }}>
@@ -76,7 +76,7 @@ const OrderReturn = () => {
         </div>
       </div>
 
-      <div className='selesai container m-3 p-1 mt-0 rounded' style={{ display: activeFilter === 'selesai' ? 'block' : 'none', border: '1px solid #2b2a4c', width: '360px'  }}>
+      <div className='selesai container m-3 p-1 mt-0 rounded' style={{ display: activeFilter === 'selesai' ? 'block' : 'none', border: '1px solid #2b2a4c', width: '340px'  }}>
         <div className='row g-2 px-2'>
           {products.map(product => (
             <div key={product._id} className='card mb-1 py-3 px-2 border border-0' style={{ boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)' }}>

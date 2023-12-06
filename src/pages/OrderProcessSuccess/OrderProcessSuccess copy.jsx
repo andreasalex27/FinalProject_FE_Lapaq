@@ -1,7 +1,34 @@
 import React, { useEffect, useState } from 'react';
+import { productId } from '../../services/product';
+import { useParams } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 
 const OrderProcessSuccess = () => {
+    const [product, setProduct] = useState({
+        nama_produk: '',
+        harga: ''
+    });
+
+    const { _id } = useParams();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                if (_id) {
+                    const response = await productId(_id);
+                    if (response) {
+                        setProduct(response.payload);
+                    }
+                } else {
+                    console.error('ID tidak valid');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+    
+        fetchData();
+    }, [_id]);
 
     const dotStyle = {
         height: '10px',
@@ -24,14 +51,32 @@ const OrderProcessSuccess = () => {
                     <p className='text-center fs-6 fw-bold' style={{color: '#B31312'}}>Pesanan Selesai</p>
                 </div>
 
-                <div className='text-center my-5'>
+                <div className='text-center my-4'>
                     <Icon icon="lets-icons:check-fill" color="#2b2a4c" width="100"/>
                     <p className='fs-6 fw-bold' style={{color: "#2B2A4C"}}>Pesanan Selesai</p>
                 </div>
 
-                <div className='m-4 py-4 rounded' style={{boxShadow: '0 3px 3px rgba(0, 0, 0, 0.5)'}}>
-                    <p className='mb-2 ms-3 fw-bold fs-6' style={{color: '#B31312'}}>Status Pengiriman</p>
-                    <div className="mx-2">
+                <div className='m-5 px-3 py-4 rounded' style={{boxShadow: '0 3px 3px rgba(0, 0, 0, 0.5)'}}>
+                    <div style={{color: '#2B2A4C'}}>
+                        <p className='mb-0 fw-bold fs-6'>Rianti Kamila</p>
+                        <p className='mb-0 fs-0'>0897 6090 0008</p>
+                        <p className='mb-0' style={{fontSize: "10px"}}>Kp. Kenari Cahaya, Jl Kembang Sakti</p>
+                    </div>
+                    <div className='mt-3'>
+                        <p className='mb-0 fw-bold fs-6'>{product.nama_produk}</p>
+                        <p>Rp {product.harga}</p>
+                    </div>
+                    <div>
+                        <p className='mb-0 fw-bold fs-6'>Nomor Resi</p>
+                        <div className='rounded d-flex justify-content-center align-items-center p-1' style={{backgroundColor: "#EA906C", padding: "1px"}}>
+                            <p className='text-white fs-6 fw-bold mb-0'>4528 9689 1258 9865</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <p className='mb-2 mx-5 fw-bold fs-6' style={{color: '#B31312'}}>Status Pengiriman</p>
+                    <div className="mx-4">
                         <ul style={listStyle}>
                             <li>
                                 <span style={dotStyle}></span>

@@ -146,7 +146,7 @@ const Homepage = () => {
                         <div className="rating ms-1" style={{ position: 'absolute', bottom: '10px', left: '10px', right: '10px' }}>
                           <div className="d-flex align-items-center">
                             <Icon icon="tabler:star-filled" color="#ea906c" width="20" height="20"/>
-                            <span className='fs-6 ms-1 fw-bold' style={{ color:"#ea906c" }}>{product.rating || <span>0,0</span>}</span>
+                            <span className='fs-6 ms-1 fw-bold' style={{ color:"#ea906c" }}>{product.rating || <span>5,0</span>}</span>
                           </div>
                         </div>
                       </div>

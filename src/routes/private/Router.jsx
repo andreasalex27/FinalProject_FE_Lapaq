@@ -132,7 +132,7 @@ const ROUTE_LIST = [
         element: <OrderHistoryLayout><OrderProcess/></OrderHistoryLayout>,
     },
     {
-        path: '/homepage/dashboard/riwayat/pemrosesan/selesai/:_id',
+        path: '/homepage/dashboard/riwayat/pemrosesan/selesai',
         element: <OrderProcessSuccess/>,
     }, 
     {

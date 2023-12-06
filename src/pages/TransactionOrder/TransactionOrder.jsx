@@ -45,10 +45,10 @@ const TransactionOrder = () => {
         <p className='text-center fs-6 fw-bold' style={{color: '#B31312'}}>Transaksi</p>
       </div>
 
-      <div className='bayar container m-3 p-1 mt-3 rounded'>
+      <div className='bayar container p-1 mt-3 rounded d-flex justify-content-center'>
         <div className='row g-2 px-2'>
           {products.map((product, index) => (
-            <div className='card mb-1 py-3 px-2 border border-0' key={index} style={{ boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)', width: '340px'}}>
+            <div className='card mb-1 py-3 px-2 border border-0' key={index} style={{ boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)', width: '340px', height: '100px'}}>
               <div className='row g-0 d-flex align-items-center'>
                 <div className='col-md-2 d-flex align-items-center'>
                   <img src={product.payload.image || defaultImageUrl} alt={product.payload.nama_produk} className="rounded" style={{ height: "60px", width: "60px" }} />

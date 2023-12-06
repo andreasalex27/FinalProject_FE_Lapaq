@@ -58,8 +58,8 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px'}}>
-        <div className="container-fluid p-0" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto' }}>
+    <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', fontFamily: 'Montserrat, sans-serif', fontSize: '12px', height: '100vh'}}>
+        <div className="container-fluid p-0" style={{ maxWidth: '390px', backgroundColor: 'white', margin: 'auto', height: '100%', overflow: 'auto'}}>
           <div className="fixed-top pe-3 mx-auto" style={{maxWidth: '390px', backgroundColor: '#2b2a4c', height: '55px', paddingTop: '13px'}}>
             <div className="d-flex justify-content-md-end">
               <div className="ms-auto">
@@ -69,14 +69,14 @@ const LandingPage = () => {
             </div>
           </div>
           <div className="container-lg bg py-4 mt-5" style={{backgroundImage: `url("https://i.imgur.com/HhZqaeQ.png")`, backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
-            <nav className="navbar d-flex nav px-2">
-                <div>
+            <nav className="navbar d-flex nav">
+                <div className='me-0'>
                     <a className="navbar-brand" href="#">
                         <img src="https://i.imgur.com/OXNQ3Sf.png" alt="Bootstrap" width="40"/>
                     </a>
                 </div>
                 <div className="wrapper-input" onClick={openSigninPage}>
-                  <form className="container-fluid">
+                  <form className="container-fluid ms-0">
                       <div className="input-group wrap-input">
                         <span className="input-group-text" id="basic-addon1">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">

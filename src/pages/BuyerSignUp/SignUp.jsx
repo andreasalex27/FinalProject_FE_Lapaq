@@ -134,7 +134,7 @@ const SignUp = () => {
   return (
     <div className="body d-flex justify-content-center align-items-center" style={{ backgroundColor: '#B31312', height: '100vh'}}>
 
-      <div className="container" style={{ maxWidth: '390px', backgroundColor: 'white', height: '100%'}}>
+      <div className="container" style={{ maxWidth: '390px', backgroundColor: 'white', height: '100%', overflow: 'auto'}}>
 
         <div className="logo" style={{height: '200px'}}>
           <img src="https://i.imgur.com/OXNQ3Sf.png" alt="logo lapaq" style={{width: "30%"}}/>
@@ -257,7 +257,7 @@ const SignUp = () => {
           </form>
         </div>
 
-        <div className="saran">
+        <div className="saran mb-5">
           <span>Sudah punya akun? <Link to='/welcome/sign-in'>Log In</Link></span>
         </div>
 

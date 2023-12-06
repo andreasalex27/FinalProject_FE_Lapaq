@@ -98,7 +98,7 @@ const OrderProcess = () => {
         <button onClick={() => setActiveFilter('selesai')} style={activeFilter === 'selesai' ? { ...buttonStyle.common, ...buttonStyle.active } : { ...buttonStyle.common, ...buttonStyle.inactive }}>Selesai</button>
       </div>
 
-      <div className='kemas container m-3 p-1 mt-0 rounded' style={{ display: activeFilter === 'kemas' ? 'block' : 'none', border: '1px solid #2b2a4c', width: '360px' }}>
+      <div className='kemas container m-3 p-1 mt-0 rounded' style={{ display: activeFilter === 'kemas' ? 'block' : 'none', border: '1px solid #2b2a4c', width: '340px' }}>
         <div className='row g-2 px-2'>
           {products.map(product => (
             <div className='card mb-1 py-3 px-2 border border-0' key={product._id} style={{ boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)'}}>
@@ -127,7 +127,7 @@ const OrderProcess = () => {
         </div>
       </div>
 
-      <div className='kirim container m-3 p-1 mt-0 rounded' style={{ display: activeFilter === 'kirim' ? 'block' : 'none', border: '1px solid #2b2a4c', width: '360px'  }}>
+      <div className='kirim container m-3 p-1 mt-0 rounded' style={{ display: activeFilter === 'kirim' ? 'block' : 'none', border: '1px solid #2b2a4c', width: '340px'  }}>
         <div className='row g-2 px-2'>
           {products.map(product => (
             <div className='card mb-1 py-3 px-2 border border-0' key={product._id} style={{ boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)' }}>
@@ -156,11 +156,11 @@ const OrderProcess = () => {
         </div>
       </div>
 
-      <div className='selesai container m-3 p-1 mt-0 rounded' style={{ display: activeFilter === 'selesai' ? 'block' : 'none', border: '1px solid #2b2a4c', width: '360px'  }}>
+      <div className='selesai container m-3 p-1 mt-0 rounded' style={{ display: activeFilter === 'selesai' ? 'block' : 'none', border: '1px solid #2b2a4c', width: '340px'  }}>
         <div className='row g-2 px-2'>
           {products.map(product => (
             <div key={product._id} className='card mb-1 py-3 px-2 border border-0' style={{ boxShadow: '0 3px 2px rgba(0, 0, 0, 0.1)' }}>
-              <Link to={`/homepage/dashboard/riwayat/pemrosesan/selesai/${product._id}`} className="text-decoration-none">
+              <Link to={`/homepage/dashboard/riwayat/pemrosesan/selesai`} className="text-decoration-none">
                 <div className='row g-0 d-flex align-items-center'>
                   <div className='col-md-2 d-flex align-items-center'>
                     <img src={product.payload.image || defaultImageUrl} alt={product.payload.nama_produk} className="rounded" style={{ height: "60px", width: "60px" }} />
